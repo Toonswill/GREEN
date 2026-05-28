@@ -1,0 +1,15 @@
+[
+  {
+    "firstName": "System",
+    "lastName": "Admin",
+    "email": "admin@ener2crowd.africa",
+    "phoneNumber": "254700000000",
+    "password": "$2b$10$Y7z3JIRZf.BnyfhCvcNYGeQtRHC2C8OzWldW4.5VQRwyKUnxMIMFi",
+    "role": "admin",
+    "kycStatus": "verified",
+    "walletBalance": 69800,
+    "createdAt": "2026-05-28T15:49:30.665Z",
+    "updatedAt": "2026-05-28T16:52:10.371Z",
+    "id": 1
+  }
+]

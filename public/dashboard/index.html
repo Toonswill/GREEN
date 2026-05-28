@@ -1,0 +1,1316 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>Ener2Crowd Africa | Green Investment</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            background: #f8f9fc;
+            color: #1a1a2e;
+            padding-bottom: 70px;
+        }
+
+        /* ========== AUTH SCREENS ========== */
+        .auth-container {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #f8f9fc;
+            padding: 20px;
+        }
+
+        .auth-card {
+            background: white;
+            border-radius: 32px;
+            padding: 48px 40px;
+            max-width: 440px;
+            width: 100%;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.02), 0 1px 2px rgba(0, 0, 0, 0.03);
+            border: 1px solid #eef2f6;
+        }
+
+        .logo {
+            text-align: center;
+            font-size: 48px;
+            margin-bottom: 8px;
+        }
+
+        .logo-text {
+            text-align: center;
+            font-size: 22px;
+            font-weight: 600;
+            color: #1a1a2e;
+            margin-bottom: 4px;
+        }
+
+        .tagline {
+            text-align: center;
+            color: #8b9aae;
+            font-size: 13px;
+            margin-bottom: 32px;
+        }
+
+        .auth-card h2 {
+            font-size: 24px;
+            font-weight: 600;
+            margin-bottom: 6px;
+        }
+
+        .subtitle {
+            color: #8b9aae;
+            font-size: 13px;
+            margin-bottom: 28px;
+        }
+
+        .input-group {
+            margin-bottom: 18px;
+        }
+
+        .input-group label {
+            display: block;
+            font-size: 13px;
+            font-weight: 500;
+            margin-bottom: 6px;
+            color: #4a5568;
+        }
+
+        .input-group input {
+            width: 100%;
+            padding: 14px 16px;
+            border: 1.5px solid #e2e8f0;
+            border-radius: 14px;
+            font-size: 15px;
+            font-family: inherit;
+            background: white;
+            transition: all 0.2s;
+        }
+
+        .input-group input:focus {
+            outline: none;
+            border-color: #2ecc71;
+            box-shadow: 0 0 0 3px rgba(46, 204, 113, 0.08);
+        }
+
+        .row-2 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 14px;
+        }
+
+        .btn-primary {
+            width: 100%;
+            background: #1a1a2e;
+            color: white;
+            border: none;
+            padding: 14px;
+            border-radius: 40px;
+            font-size: 15px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .btn-primary:hover {
+            background: #2d2d44;
+        }
+
+        .btn-secondary {
+            background: #f0f4f8;
+            color: #4a5568;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 40px;
+            font-size: 13px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .btn-secondary:hover {
+            background: #e2e8f0;
+        }
+
+        .btn-outline {
+            background: transparent;
+            border: 1.5px solid #e2e8f0;
+            color: #4a5568;
+            padding: 10px 20px;
+            border-radius: 40px;
+            font-size: 13px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .btn-outline:hover {
+            border-color: #2ecc71;
+            color: #2ecc71;
+        }
+
+        .auth-switch {
+            text-align: center;
+            margin-top: 24px;
+            font-size: 13px;
+            color: #8b9aae;
+        }
+
+        .auth-switch a {
+            color: #2ecc71;
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        /* ========== DASHBOARD ========== */
+        .dashboard-container {
+            max-width: 600px;
+            margin: 0 auto;
+            background: #f8f9fc;
+            min-height: 100vh;
+            padding-bottom: 80px;
+        }
+
+        /* Header - Minimal */
+        .dashboard-header {
+            background: white;
+            padding: 20px 20px 16px;
+            border-bottom: 1px solid #eef2f6;
+        }
+
+        .welcome-section h1 {
+            font-size: 22px;
+            font-weight: 600;
+            color: #1a1a2e;
+            margin-bottom: 4px;
+        }
+
+        .welcome-section p {
+            font-size: 13px;
+            color: #8b9aae;
+        }
+
+        /* Stats Cards - Clean */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 12px;
+            margin-top: 20px;
+        }
+
+        .stat-card {
+            background: white;
+            border-radius: 20px;
+            padding: 14px 10px;
+            text-align: center;
+            border: 1px solid #eef2f6;
+        }
+
+        .stat-value {
+            font-size: 20px;
+            font-weight: 700;
+            color: #1a1a2e;
+        }
+
+        .stat-label {
+            font-size: 11px;
+            color: #8b9aae;
+            margin-top: 5px;
+            font-weight: 500;
+        }
+
+        /* Main Content */
+        .main-content {
+            padding: 20px;
+        }
+
+        /* Section Header */
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 16px;
+        }
+
+        .section-header h2 {
+            font-size: 18px;
+            font-weight: 600;
+            color: #1a1a2e;
+        }
+
+        /* Project Cards */
+        .project-card {
+            background: white;
+            border-radius: 20px;
+            padding: 18px;
+            margin-bottom: 12px;
+            cursor: pointer;
+            transition: all 0.2s;
+            border: 1px solid #eef2f6;
+        }
+
+        .project-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.04);
+            border-color: transparent;
+        }
+
+        .project-badge {
+            display: inline-block;
+            background: #f0f4f8;
+            color: #4a5568;
+            padding: 4px 12px;
+            border-radius: 30px;
+            font-size: 11px;
+            font-weight: 500;
+            margin-bottom: 12px;
+        }
+
+        .project-title {
+            font-size: 17px;
+            font-weight: 600;
+            margin-bottom: 6px;
+            color: #1a1a2e;
+        }
+
+        .project-description {
+            font-size: 13px;
+            color: #8b9aae;
+            line-height: 1.4;
+            margin-bottom: 14px;
+        }
+
+        .progress-bar-container {
+            background: #eef2f6;
+            border-radius: 20px;
+            height: 6px;
+            margin: 12px 0;
+        }
+
+        .progress-bar {
+            background: #2ecc71;
+            height: 100%;
+            border-radius: 20px;
+            width: 0%;
+        }
+
+        .project-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 12px;
+        }
+
+        .roi-badge {
+            background: #f0f4f8;
+            color: #2ecc71;
+            padding: 4px 10px;
+            border-radius: 30px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        .investors-count {
+            font-size: 12px;
+            color: #8b9aae;
+        }
+
+        /* Wallet Card */
+        .wallet-card {
+            background: white;
+            border-radius: 24px;
+            padding: 28px 24px;
+            text-align: center;
+            border: 1px solid #eef2f6;
+            margin-bottom: 20px;
+        }
+
+        .balance-label {
+            font-size: 13px;
+            color: #8b9aae;
+            margin-bottom: 8px;
+        }
+
+        .balance-amount {
+            font-size: 42px;
+            font-weight: 700;
+            color: #1a1a2e;
+            margin-bottom: 20px;
+        }
+
+        .wallet-actions {
+            display: flex;
+            gap: 12px;
+            justify-content: center;
+        }
+
+        /* Investment Items */
+        .investment-item {
+            background: white;
+            border-radius: 16px;
+            padding: 16px;
+            margin-bottom: 10px;
+            border: 1px solid #eef2f6;
+        }
+
+        .investment-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .investment-title {
+            font-weight: 600;
+            font-size: 15px;
+        }
+
+        .investment-status {
+            font-size: 11px;
+            padding: 4px 10px;
+            border-radius: 30px;
+        }
+
+        .status-completed {
+            background: #e8f5e9;
+            color: #2ecc71;
+        }
+
+        /* Impact Card */
+        .impact-card {
+            background: white;
+            border-radius: 24px;
+            padding: 28px 20px;
+            text-align: center;
+            border: 1px solid #eef2f6;
+        }
+
+        .impact-stat {
+            margin-bottom: 24px;
+        }
+
+        .impact-value {
+            font-size: 36px;
+            font-weight: 700;
+            color: #1a1a2e;
+        }
+
+        .impact-label {
+            font-size: 12px;
+            color: #8b9aae;
+            margin-top: 6px;
+        }
+
+        /* Profile Card */
+        .profile-card {
+            background: white;
+            border-radius: 24px;
+            padding: 24px;
+            border: 1px solid #eef2f6;
+        }
+
+        .profile-field {
+            display: flex;
+            justify-content: space-between;
+            padding: 14px 0;
+            border-bottom: 1px solid #eef2f6;
+        }
+
+        .profile-field:last-child {
+            border-bottom: none;
+        }
+
+        .profile-field label {
+            font-size: 13px;
+            color: #8b9aae;
+        }
+
+        .profile-field span {
+            font-weight: 500;
+            font-size: 13px;
+            color: #1a1a2e;
+        }
+
+        /* Bottom Navigation */
+        .bottom-nav {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            max-width: 600px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.96);
+            backdrop-filter: blur(20px);
+            display: flex;
+            padding: 10px 20px 22px;
+            border-top: 1px solid #eef2f6;
+        }
+
+        .nav-item {
+            flex: 1;
+            background: none;
+            border: none;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 4px;
+            cursor: pointer;
+            transition: all 0.2s;
+            padding: 8px;
+            border-radius: 40px;
+            color: #a0aec0;
+            font-size: 11px;
+            font-weight: 500;
+        }
+
+        .nav-item.active {
+            color: #2ecc71;
+            background: #f0fdf4;
+        }
+
+        .nav-icon {
+            font-size: 22px;
+        }
+
+        /* Tab Content */
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        /* Modals */
+        .modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(4px);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+        }
+
+        .modal-content {
+            background: white;
+            border-radius: 28px;
+            padding: 28px;
+            width: 90%;
+            max-width: 380px;
+        }
+
+        .close-btn {
+            float: right;
+            font-size: 22px;
+            cursor: pointer;
+            color: #a0aec0;
+        }
+
+        /* Loading & Empty States */
+        .loading, .empty-state {
+            text-align: center;
+            padding: 48px 20px;
+            color: #8b9aae;
+            font-size: 13px;
+        }
+
+        /* Toast */
+        .toast {
+            position: fixed;
+            bottom: 80px;
+            left: 20px;
+            right: 20px;
+            background: #1a1a2e;
+            color: white;
+            padding: 12px 20px;
+            border-radius: 60px;
+            text-align: center;
+            font-size: 13px;
+            z-index: 1000;
+            animation: slideUp 0.2s ease;
+        }
+
+        .toast.success {
+            background: #2ecc71;
+            color: white;
+        }
+
+        .toast.error {
+            background: #e74c3c;
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Create Form */
+        .create-form {
+            background: white;
+            border-radius: 20px;
+            padding: 20px;
+            margin-bottom: 16px;
+            border: 1px solid #eef2f6;
+        }
+
+        .create-form input, .create-form select, .create-form textarea {
+            width: 100%;
+            padding: 12px;
+            margin: 8px 0;
+            border: 1.5px solid #eef2f6;
+            border-radius: 14px;
+            font-size: 14px;
+            font-family: inherit;
+        }
+
+        .create-form input:focus, .create-form select:focus, .create-form textarea:focus {
+            outline: none;
+            border-color: #2ecc71;
+        }
+
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <!-- Login Screen -->
+    <div id="login-screen" class="auth-container">
+        <div class="auth-card">
+            <div class="logo">🌱</div>
+            <div class="logo-text">Ener2Crowd Africa</div>
+            <div class="tagline">Invest in climate solutions</div>
+            <h2>Welcome back</h2>
+            <p class="subtitle">Log in to your account</p>
+            <div class="input-group">
+                <input type="email" id="login-email" placeholder="Email address" value="admin@ener2crowd.africa">
+            </div>
+            <div class="input-group">
+                <input type="password" id="login-password" placeholder="Password" value="Admin123!">
+            </div>
+            <button class="btn-primary" onclick="handleLogin()">Log in</button>
+            <div class="auth-switch">
+                New here? <a href="#" onclick="showSignup()">Create account</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Signup Screen -->
+    <div id="signup-screen" class="auth-container" style="display: none;">
+        <div class="auth-card">
+            <div class="logo">✨</div>
+            <div class="logo-text">Get started</div>
+            <div class="tagline">Join the green revolution</div>
+            <h2>Create account</h2>
+            <p class="subtitle">Start your investment journey</p>
+            <div class="row-2">
+                <div class="input-group">
+                    <input type="text" id="signup-firstname" placeholder="First name">
+                </div>
+                <div class="input-group">
+                    <input type="text" id="signup-lastname" placeholder="Last name">
+                </div>
+            </div>
+            <div class="input-group">
+                <input type="email" id="signup-email" placeholder="Email address">
+            </div>
+            <div class="input-group">
+                <input type="tel" id="signup-phone" placeholder="Phone number">
+            </div>
+            <div class="input-group">
+                <input type="password" id="signup-password" placeholder="Create password">
+            </div>
+            <button class="btn-primary" onclick="handleSignup()">Create account</button>
+            <div class="auth-switch">
+                Already have an account? <a href="#" onclick="showLogin()">Log in</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Dashboard -->
+    <div id="dashboard" style="display: none;">
+        <div class="dashboard-container">
+            <div class="dashboard-header">
+                <div class="welcome-section">
+                    <h1 id="welcome-name">Welcome back</h1>
+                    <p>Track your impact</p>
+                </div>
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-value" id="stat-invested">KES 0</div>
+                        <div class="stat-label">Invested</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-value" id="stat-return">0%</div>
+                        <div class="stat-label">Return</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-value" id="stat-co2">0</div>
+                        <div class="stat-label">CO₂ tons</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="main-content">
+                <!-- Projects Tab -->
+                <div id="projects-tab" class="tab-content active">
+                    <div class="section-header">
+                        <h2>📋 Active projects</h2>
+                        <button class="btn-secondary" onclick="showCreateForm()">+ New</button>
+                    </div>
+                    <div id="create-form" class="create-form" style="display: none;">
+                        <input type="text" id="new-title" placeholder="Project title">
+                        <textarea id="new-desc" rows="2" placeholder="Description"></textarea>
+                        <select id="new-sector">
+                            <option value="solar">☀️ Solar</option>
+                            <option value="e-mobility">⚡ E-Mobility</option>
+                            <option value="green-hydrogen">💧 Green Hydrogen</option>
+                        </select>
+                        <input type="number" id="new-goal" placeholder="Goal amount (KES)">
+                        <input type="number" id="new-return" placeholder="Expected return (%)">
+                        <button class="btn-primary" onclick="createProject()">Create project</button>
+                        <button class="btn-outline" onclick="hideCreateForm()">Cancel</button>
+                    </div>
+                    <div id="projects-list">Loading...</div>
+                </div>
+
+                <!-- Portfolio Tab -->
+                <div id="portfolio-tab" class="tab-content">
+                    <div class="section-header">
+                        <h2>💰 Your portfolio</h2>
+                    </div>
+                    <div id="portfolio-list">No investments yet</div>
+                </div>
+
+                <!-- Wallet Tab -->
+                <div id="wallet-tab" class="tab-content">
+                    <div class="wallet-card">
+                        <div class="balance-label">Available balance</div>
+                        <div class="balance-amount" id="wallet-balance">KES 0</div>
+                        <div class="wallet-actions">
+                            <button class="btn-secondary" onclick="showDeposit()">Add funds</button>
+                            <button class="btn-outline" onclick="withdraw()">Withdraw</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Impact Tab -->
+                <div id="impact-tab" class="tab-content">
+                    <div class="section-header">
+                        <h2>🌱 Environmental impact</h2>
+                    </div>
+                    <div class="impact-card">
+                        <div class="impact-stat">
+                            <div class="impact-value" id="impact-co2">0</div>
+                            <div class="impact-label">tons CO₂ avoided</div>
+                        </div>
+                        <div class="impact-stat">
+                            <div class="impact-value" id="impact-trees">0</div>
+                            <div class="impact-label">trees equivalent</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Profile Tab -->
+                <div id="profile-tab" class="tab-content">
+                    <div class="section-header">
+                        <h2>👤 Account</h2>
+                    </div>
+                    <div class="profile-card">
+                        <div class="profile-field">
+                            <label>Name</label>
+                            <span id="profile-name">-</span>
+                        </div>
+                        <div class="profile-field">
+                            <label>Email</label>
+                            <span id="profile-email">-</span>
+                        </div>
+                        <div class="profile-field">
+                            <label>Phone</label>
+                            <span id="profile-phone">-</span>
+                        </div>
+                        <div class="profile-field">
+                            <label>KYC status</label>
+                            <span id="profile-kyc">-</span>
+                        </div>
+                        <button class="btn-primary" onclick="logout()" style="margin-top: 20px;">Sign out</button>
+                    </div>
+                </div>
+            </div>
+
+            <nav class="bottom-nav">
+                <button class="nav-item active" onclick="switchTab('projects')"><span class="nav-icon">📋</span><span>Projects</span></button>
+                <button class="nav-item" onclick="switchTab('portfolio')"><span class="nav-icon">💰</span><span>Portfolio</span></button>
+                <button class="nav-item" onclick="switchTab('wallet')"><span class="nav-icon">👛</span><span>Wallet</span></button>
+                <button class="nav-item" onclick="switchTab('impact')"><span class="nav-icon">🌱</span><span>Impact</span></button>
+                <button class="nav-item" onclick="switchTab('profile')"><span class="nav-icon">👤</span><span>Account</span></button>
+            </nav>
+        </div>
+    </div>
+
+    <!-- Investment Modal -->
+    <div id="invest-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeInvestModal()">✕</span>
+            <h3 style="margin-bottom: 20px;">Invest</h3>
+            <div class="input-group">
+                <input type="number" id="invest-amount" placeholder="Amount (KES)">
+            </div>
+            <button class="btn-primary" onclick="confirmInvestment()">Confirm Investment</button>
+        </div>
+    </div>
+
+    <!-- Deposit Modal -->
+    <div id="deposit-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeDepositModal()">✕</span>
+            <h3 style="margin-bottom: 20px;">Add funds</h3>
+            <div class="input-group">
+                <input type="number" id="deposit-amount" placeholder="Amount (KES)">
+            </div>
+            <div class="input-group">
+                <input type="tel" id="deposit-phone" placeholder="Phone number">
+            </div>
+            <button class="btn-primary" onclick="confirmDeposit()">Pay with M-Pesa</button>
+        </div>
+    </div>
+
+    <script>
+        const API_URL = 'http://localhost:3000/api';
+        let currentToken = null;
+        let currentUser = null;
+        let selectedProject = null;
+
+        // Check saved token
+        const savedToken = localStorage.getItem('token');
+        if (savedToken) {
+            currentToken = savedToken;
+            verifyToken();
+        }
+
+        async function verifyToken() {
+            try {
+                const res = await fetch(`${API_URL}/auth/me`, {
+                    headers: { 'Authorization': `Bearer ${currentToken}` }
+                });
+                if (res.ok) {
+                    const data = await res.json();
+                    currentUser = data.user;
+                    showDashboard();
+                    loadProjects();
+                    loadWallet();
+                    loadProfile();
+                    document.getElementById('welcome-name').innerText = `Hello, ${currentUser.firstName}`;
+                } else {
+                    localStorage.removeItem('token');
+                    showLogin();
+                }
+            } catch(e) {
+                showLogin();
+            }
+        }
+
+        async function handleLogin() {
+            const email = document.getElementById('login-email').value;
+            const password = document.getElementById('login-password').value;
+            
+            try {
+                const res = await fetch(`${API_URL}/auth/login`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ email, password })
+                });
+                const data = await res.json();
+                
+                if (data.success) {
+                    currentToken = data.token;
+                    currentUser = data.user;
+                    localStorage.setItem('token', data.token);
+                    showDashboard();
+                    loadProjects();
+                    loadWallet();
+                    loadProfile();
+                    document.getElementById('welcome-name').innerText = `Hello, ${currentUser.firstName}`;
+                    showToast('Logged in', 'success');
+                } else {
+                    showToast('Login failed', 'error');
+                }
+            } catch(e) {
+                showToast('Connection error', 'error');
+            }
+        }
+
+        async function handleSignup() {
+            const firstName = document.getElementById('signup-firstname').value;
+            const lastName = document.getElementById('signup-lastname').value;
+            const email = document.getElementById('signup-email').value;
+            let phone = document.getElementById('signup-phone').value;
+            const password = document.getElementById('signup-password').value;
+            
+            phone = phone.replace(/^0/, '254');
+            
+            try {
+                const res = await fetch(`${API_URL}/auth/signup`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ firstName, lastName, email, phoneNumber: phone, password, role: 'investor' })
+                });
+                const data = await res.json();
+                
+                if (data.success) {
+                    currentToken = data.token;
+                    currentUser = data.user;
+                    localStorage.setItem('token', data.token);
+                    showDashboard();
+                    loadProjects();
+                    loadWallet();
+                    loadProfile();
+                    showToast('Account created', 'success');
+                } else {
+                    showToast('Signup failed', 'error');
+                }
+            } catch(e) {
+                showToast('Connection error', 'error');
+            }
+        }
+
+        function showLogin() {
+            document.getElementById('login-screen').style.display = 'flex';
+            document.getElementById('signup-screen').style.display = 'none';
+            document.getElementById('dashboard').style.display = 'none';
+        }
+
+        function showSignup() {
+            document.getElementById('login-screen').style.display = 'none';
+            document.getElementById('signup-screen').style.display = 'flex';
+            document.getElementById('dashboard').style.display = 'none';
+        }
+
+        function showDashboard() {
+            document.getElementById('login-screen').style.display = 'none';
+            document.getElementById('signup-screen').style.display = 'none';
+            document.getElementById('dashboard').style.display = 'block';
+        }
+
+        function logout() {
+            localStorage.removeItem('token');
+            currentToken = null;
+            currentUser = null;
+            showLogin();
+            showToast('Signed out', 'success');
+        }
+
+        function switchTab(tab) {
+            document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
+            document.getElementById(`${tab}-tab`).classList.add('active');
+            document.querySelectorAll('.nav-item').forEach(btn => btn.classList.remove('active'));
+            event.target.closest('.nav-item').classList.add('active');
+            
+            if (tab === 'portfolio') loadPortfolio();
+            if (tab === 'wallet') loadWallet();
+            if (tab === 'impact') loadImpact();
+        }
+
+        async function loadProjects() {
+            const container = document.getElementById('projects-list');
+            container.innerHTML = '<div class="loading">Loading projects...</div>';
+            
+            try {
+                const res = await fetch(`${API_URL}/projects`);
+                const data = await res.json();
+                
+                if (data.success && data.projects.length > 0) {
+                    container.innerHTML = data.projects.map(p => `
+                        <div class="project-card" onclick="openInvestModal(${p.id}, '${p.title}', ${p.expectedReturnPercent})">
+                            <span class="project-badge">${p.sector}</span>
+                            <div class="project-title">${p.title}</div>
+                            <div class="project-description">${p.description.substring(0, 80)}...</div>
+                            <div class="progress-bar-container">
+                                <div class="progress-bar" style="width: ${(p.currentAmount / p.goalAmount) * 100}%"></div>
+                            </div>
+                            <div class="project-footer">
+                                <span class="investors-count">KES ${p.currentAmount.toLocaleString()} raised</span>
+                                <span class="roi-badge">${p.expectedReturnPercent}%</span>
+                            </div>
+                        </div>
+                    `).join('');
+                } else {
+                    container.innerHTML = '<div class="empty-state">No projects available</div>';
+                }
+            } catch(e) {
+                container.innerHTML = '<div class="empty-state">Failed to load projects</div>';
+            }
+        }
+
+        async function createProject() {
+            const title = document.getElementById('new-title').value;
+            const desc = document.getElementById('new-desc').value;
+            const sector = document.getElementById('new-sector').value;
+            const goal = parseInt(document.getElementById('new-goal').value);
+            const returns = parseInt(document.getElementById('new-return').value);
+            
+            if (!title || !desc || !goal) {
+                showToast('Fill all fields', 'error');
+                return;
+            }
+            
+            const res = await fetch(`${API_URL}/projects`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${currentToken}`
+                },
+                body: JSON.stringify({
+                    title, description: desc, sector, goalAmount: goal, expectedReturnPercent: returns,
+                    deadline: '2025-12-31', developerName: currentUser.firstName + ' ' + currentUser.lastName,
+                    developerEmail: currentUser.email, location: 'Kenya'
+                })
+            });
+            
+            const data = await res.json();
+            if (data.success) {
+                showToast('Project created', 'success');
+                hideCreateForm();
+                loadProjects();
+            } else {
+                showToast('Error: ' + data.error, 'error');
+            }
+        }
+
+        function showCreateForm() {
+            document.getElementById('create-form').style.display = 'block';
+        }
+
+        function hideCreateForm() {
+            document.getElementById('create-form').style.display = 'none';
+            document.getElementById('new-title').value = '';
+            document.getElementById('new-desc').value = '';
+            document.getElementById('new-goal').value = '';
+            document.getElementById('new-return').value = '';
+        }
+
+        function openInvestModal(id, title, returns) {
+            selectedProject = { id, title, returns };
+            document.getElementById('invest-modal').style.display = 'flex';
+        }
+
+        function closeInvestModal() {
+            document.getElementById('invest-modal').style.display = 'none';
+            document.getElementById('invest-amount').value = '';
+        }
+
+        async function confirmInvestment() {
+    const amount = parseInt(document.getElementById('invest-amount').value);
+    
+    if (!amount || amount < 10) {
+        showToast('Minimum investment is KES 10', 'error');
+        return;
+    }
+    
+    // Check maximum investment limit (CMA rule)
+    if (amount > 100000) {
+        showToast('Maximum investment per transaction is KES 100,000 (CMA regulation)', 'error');
+        return;
+    }
+    
+    // Check if user has enough wallet balance
+    const currentBalance = currentUser?.walletBalance || 0;
+    if (amount > currentBalance) {
+        showToast(`Insufficient balance! You have KES ${currentBalance.toLocaleString()}. Please top up your wallet.`, 'error');
+        return;
+    }
+    
+    // Disable button to prevent double submission
+    const investBtn = document.querySelector('#invest-modal .btn-primary');
+    if (investBtn) {
+        investBtn.disabled = true;
+        investBtn.innerText = 'Processing...';
+    }
+    
+    try {
+        const response = await fetch(`${API_URL}/investments`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${currentToken}`
+            },
+            body: JSON.stringify({
+                phoneNumber: currentUser.phoneNumber,
+                amount: amount,
+                projectId: selectedProject.id,
+                investorName: currentUser.firstName + ' ' + currentUser.lastName,
+                investorEmail: currentUser.email
+            })
+        });
+        
+        const data = await response.json();
+        
+        if (data.success) {
+            // Show success message first
+            showToast(`✅ Investment of KES ${amount.toLocaleString()} successful!`, 'success');
+            
+            // Close modal
+            closeInvestModal();
+            
+            // Refresh all data - wrap in try/catch individually to prevent cascading errors
+            try { await loadWallet(); } catch(e) { console.error('Wallet refresh error:', e); }
+            try { await loadProjects(); } catch(e) { console.error('Projects refresh error:', e); }
+            try { await loadPortfolio(); } catch(e) { console.error('Portfolio refresh error:', e); }
+            try { await loadImpact(); } catch(e) { console.error('Impact refresh error:', e); }
+            try { await updateStats(); } catch(e) { console.error('Stats update error:', e); }
+            
+        } else {
+            showToast('❌ Investment failed: ' + data.error, 'error');
+        }
+    } catch (error) {
+        console.error('Investment error:', error);
+        showToast('❌ Investment failed. Please try again.', 'error');
+    } finally {
+        // Re-enable button
+        if (investBtn) {
+            investBtn.disabled = false;
+            investBtn.innerText = 'Confirm Investment';
+        }
+    }
+}
+
+        async function loadWallet() {
+    try {
+        const response = await fetch(`${API_URL}/wallet/balance`, {
+            headers: { 'Authorization': `Bearer ${currentToken}` }
+        });
+        const data = await response.json();
+        
+        if (data.success) {
+            const balanceElement = document.getElementById('wallet-balance');
+            if (balanceElement) {
+                balanceElement.innerHTML = `KES ${data.balance.toLocaleString()}`;
+            }
+            // Update currentUser wallet balance
+            if (currentUser) {
+                currentUser.walletBalance = data.balance;
+            }
+            console.log('Wallet balance loaded:', data.balance);
+        } else {
+            console.error('Failed to load wallet:', data.error);
+        }
+    } catch (error) {
+        console.error('Load wallet error:', error);
+    }
+}
+
+        function showDeposit() {
+            document.getElementById('deposit-modal').style.display = 'flex';
+        }
+
+        function closeDepositModal() {
+            document.getElementById('deposit-modal').style.display = 'none';
+            document.getElementById('deposit-amount').value = '';
+            document.getElementById('deposit-phone').value = '';
+        }
+
+        async function confirmDeposit() {
+    const amount = parseInt(document.getElementById('deposit-amount').value);
+    let phone = document.getElementById('deposit-phone').value;
+    phone = phone.replace(/^0/, '254');
+    
+    if (!amount || amount < 10) {
+        showToast('Minimum deposit is KES 10', 'error');
+        return;
+    }
+    
+    showToast('Processing deposit...', 'info');
+    
+    try {
+        const response = await fetch(`${API_URL}/wallet/deposit`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${currentToken}`
+            },
+            body: JSON.stringify({ amount, phoneNumber: phone })
+        });
+        
+        const data = await response.json();
+        
+        if (data.success) {
+            showToast(`KES ${amount.toLocaleString()} deposited successfully!`, 'success');
+            closeDepositModal();
+            // Wait a moment then refresh wallet balance
+            setTimeout(async () => {
+                await loadWallet();
+                await updateStats();
+                await loadImpact();
+                showToast('Wallet updated!', 'success');
+            }, 500);
+        } else {
+            showToast('Deposit failed: ' + data.error, 'error');
+        }
+    } catch (error) {
+        console.error('Deposit error:', error);
+        showToast('Deposit failed. Please try again.', 'error');
+    }
+}
+
+        async function withdraw() {
+    const amount = prompt('Enter amount to withdraw (KES):\nMinimum KES 100');
+    if (!amount) return;
+    
+    const withdrawAmount = parseInt(amount);
+    
+    if (withdrawAmount < 100) {
+        showToast('Minimum withdrawal is KES 100', 'error');
+        return;
+    }
+    
+    if (withdrawAmount > (currentUser?.walletBalance || 0)) {
+        showToast(`Insufficient balance! You have KES ${currentUser?.walletBalance?.toLocaleString() || 0}`, 'error');
+        return;
+    }
+    
+    // Disable withdraw button temporarily
+    const withdrawBtn = document.querySelector('#wallet-tab .btn-outline');
+    if (withdrawBtn) {
+        withdrawBtn.disabled = true;
+        withdrawBtn.innerText = 'Processing...';
+    }
+    
+    try {
+        const response = await fetch(`${API_URL}/wallet/withdraw`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${currentToken}`
+            },
+            body: JSON.stringify({ 
+                amount: withdrawAmount, 
+                phoneNumber: currentUser.phoneNumber 
+            })
+        });
+        
+        const data = await response.json();
+        
+        if (data.success) {
+            // Show success message
+            showToast(`✅ KES ${withdrawAmount.toLocaleString()} withdrawn successfully!`, 'success');
+            
+            // Refresh wallet balance only (wrap in try/catch)
+            try {
+                await loadWallet();
+            } catch(e) {
+                console.error('Wallet refresh error:', e);
+            }
+            
+            // Update stats without causing errors
+            try {
+                await updateStats();
+            } catch(e) {
+                console.error('Stats update error:', e);
+            }
+            
+        } else {
+            showToast('❌ Withdrawal failed: ' + data.error, 'error');
+        }
+    } catch (error) {
+        console.error('Withdrawal error:', error);
+        showToast('❌ Withdrawal failed. Please try again.', 'error');
+    } finally {
+        // Re-enable button
+        if (withdrawBtn) {
+            withdrawBtn.disabled = false;
+            withdrawBtn.innerText = 'Withdraw';
+        }
+    }
+}
+
+        async function loadPortfolio() {
+            const res = await fetch(`${API_URL}/investments?phoneNumber=${currentUser.phoneNumber}`, {
+                headers: { 'Authorization': `Bearer ${currentToken}` }
+            });
+            const data = await res.json();
+            
+            const container = document.getElementById('portfolio-list');
+            if (data.success && data.investments.length > 0) {
+                const completed = data.investments.filter(i => i.status === 'completed');
+                if (completed.length > 0) {
+                    const total = completed.reduce((s, i) => s + i.amount, 0);
+                    container.innerHTML = `
+                        <div style="background: white; border-radius: 20px; padding: 20px; margin-bottom: 16px; border: 1px solid #eef2f6;">
+                            <div style="font-size: 28px; font-weight: 700;">KES ${total.toLocaleString()}</div>
+                            <div style="font-size: 12px; color: #8b9aae;">Total invested</div>
+                        </div>
+                        ${completed.map(i => `
+                            <div class="investment-item">
+                                <div class="investment-header">
+                                    <span class="investment-title">${i.projectTitle}</span>
+                                    <span class="investment-status status-completed">Confirmed</span>
+                                </div>
+                                <div>KES ${i.amount.toLocaleString()}</div>
+                                <div style="font-size: 11px; color: #8b9aae; margin-top: 6px;">${new Date(i.createdAt).toLocaleDateString()}</div>
+                            </div>
+                        `).join('')}
+                    `;
+                } else {
+                    container.innerHTML = '<div class="empty-state">No completed investments yet</div>';
+                }
+            } else {
+                container.innerHTML = '<div class="empty-state">No investments yet</div>';
+            }
+        }
+
+        async function loadImpact() {
+            const res = await fetch(`${API_URL}/investments?phoneNumber=${currentUser.phoneNumber}`, {
+                headers: { 'Authorization': `Bearer ${currentToken}` }
+            });
+            const data = await res.json();
+            
+            let total = 0;
+            if (data.success && data.investments) {
+                total = data.investments.reduce((s, i) => s + (i.status === 'completed' ? i.amount : 0), 0);
+            }
+            
+            const co2 = (total / 50000).toFixed(1);
+            const trees = Math.round(co2 * 100);
+            
+            document.getElementById('impact-co2').innerHTML = co2;
+            document.getElementById('impact-trees').innerHTML = trees;
+            document.getElementById('stat-co2').innerHTML = co2;
+            document.getElementById('stat-invested').innerHTML = `KES ${total.toLocaleString()}`;
+        }
+
+        function loadProfile() {
+            document.getElementById('profile-name').innerHTML = `${currentUser.firstName} ${currentUser.lastName}`;
+            document.getElementById('profile-email').innerHTML = currentUser.email;
+            document.getElementById('profile-phone').innerHTML = currentUser.phoneNumber;
+            const kycStatus = currentUser.kycStatus === 'verified' ? '✅ Verified' : currentUser.kycStatus === 'pending' ? '⏳ Pending' : 'Not submitted';
+            document.getElementById('profile-kyc').innerHTML = kycStatus;
+        }
+
+        function showToast(msg, type) {
+            const toast = document.createElement('div');
+            toast.className = `toast ${type}`;
+            toast.innerText = msg;
+            document.body.appendChild(toast);
+            setTimeout(() => toast.remove(), 3000);
+        }
+    </script>
+</body>
+</html>

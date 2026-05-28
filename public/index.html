@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>Ener2Crowd Africa | Invest in Climate Projects</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="app">
+        <!-- Header -->
+        <header>
+            <div class="logo">🌍 Ener2Crowd Africa</div>
+            <div class="tagline">Invest in Kenya's climate future</div>
+        </header>
+
+        <!-- Main Content -->
+        <main>
+            <!-- Projects Section -->
+            <div class="section-header">
+                <h2>🔥 Live Climate Projects</h2>
+                <p>Invest as low as KES 10</p>
+            </div>
+            <div id="projects-container" class="projects-grid">
+                <div class="loading">Loading projects...</div>
+            </div>
+
+            <!-- Investment Modal (hidden by default) -->
+            <div id="investment-modal" class="modal" style="display: none;">
+                <div class="modal-content">
+                    <span class="close-btn" onclick="closeModal()">&times;</span>
+                    <h3 id="modal-project-title">Invest in Project</h3>
+                    <form id="investment-form">
+                        <label>Amount (KES):</label>
+                        <input type="number" id="investment-amount" min="10" max="100000" placeholder="Enter amount" required>
+                        <small>Min KES 10 | Max KES 100,000 (CMA rule)</small>
+                        
+                        <label>Your Name:</label>
+                        <input type="text" id="investor-name" placeholder="John Kimani" required>
+                        
+                        <label>Phone Number (M-Pesa):</label>
+                        <input type="tel" id="investor-phone" placeholder="0712345678" required>
+                        
+                        <label>Email (optional):</label>
+                        <input type="email" id="investor-email" placeholder="you@example.com">
+                        
+                        <button type="submit" class="invest-btn">Invest Now</button>
+                    </form>
+                    <div id="payment-status" class="status-message"></div>
+                </div>
+            </div>
+        </main>
+
+        <!-- Bottom Navigation -->
+        <nav class="bottom-nav">
+            <button onclick="showProjectsTab()" id="tab-projects" class="active">📋 Projects</button>
+            <button onclick="showPortfolioTab()" id="tab-portfolio">💰 My Portfolio</button>
+        </nav>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
