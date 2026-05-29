@@ -1,0 +1,1233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>GAIN | Green Africa Investment Network</title>
+    <style>
+        /* ========== GAIN PREMIUM DESIGN SYSTEM ========== */
+        :root {
+            --primary-dark: #0a2e24;
+            --primary-light: #144d3e;
+            --accent-green: #00e676;
+            --accent-neon: #00ff87;
+            --bg-white: #ffffff;
+            --bg-light: #fafbfc;
+            --text-dark: #1a2c28;
+            --text-muted: #6c7a73;
+            --card-shadow: 0 4px 20px rgba(0, 0, 0, 0.04);
+            --card-hover: 0 8px 30px rgba(0, 0, 0, 0.08);
+            --radius-lg: 24px;
+            --radius-md: 16px;
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            background: var(--bg-white);
+            color: var(--text-dark);
+            line-height: 1.5;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* ========== LOGIN SCREEN STYLES ========== */
+        .login-body {
+            background: linear-gradient(135deg, #f5f7f6 0%, #e8edea 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .login-container {
+            width: 100%;
+            max-width: 440px;
+        }
+
+        .login-card {
+            background: white;
+            border-radius: 32px;
+            padding: 48px 40px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.05);
+            border: 1px solid rgba(0, 230, 118, 0.1);
+        }
+
+        .logo {
+            text-align: center;
+            margin-bottom: 32px;
+        }
+
+        .logo h1 {
+            font-size: 36px;
+            color: #0a2e24;
+            letter-spacing: -0.5px;
+        }
+
+        .logo span {
+            color: #00e676;
+        }
+
+        .logo p {
+            font-size: 13px;
+            color: #6c7a73;
+            margin-top: 4px;
+        }
+
+        .registered-text {
+            text-align: center;
+            margin-bottom: 28px;
+        }
+
+        .registered-text h2 {
+            font-size: 24px;
+            font-weight: 700;
+            color: #1a2e24;
+            margin-bottom: 6px;
+        }
+
+        .registered-text p {
+            font-size: 13px;
+            color: #6c7a73;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 12px;
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: #4a5568;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 14px 16px;
+            border: 1.5px solid #e2e8f0;
+            border-radius: 14px;
+            font-size: 15px;
+            font-family: inherit;
+            transition: all 0.2s;
+        }
+
+        .form-group input:focus {
+            outline: none;
+            border-color: #00e676;
+            box-shadow: 0 0 0 3px rgba(0, 230, 118, 0.1);
+        }
+
+        .forgot-link {
+            text-align: right;
+            margin-bottom: 24px;
+        }
+
+        .forgot-link a {
+            font-size: 12px;
+            color: #00e676;
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .btn-login {
+            width: 100%;
+            background: #0a2e24;
+            color: white;
+            border: none;
+            padding: 14px;
+            border-radius: 40px;
+            font-size: 15px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+            margin-bottom: 24px;
+        }
+
+        .btn-login:hover {
+            background: #144d3e;
+            transform: translateY(-1px);
+        }
+
+        .language-selector {
+            text-align: center;
+            margin-bottom: 24px;
+        }
+
+        .language-selector span {
+            font-size: 13px;
+            color: #6c7a73;
+            cursor: pointer;
+            padding: 4px 8px;
+        }
+
+        .language-selector span.active {
+            color: #0a2e24;
+            font-weight: 600;
+            border-bottom: 2px solid #00e676;
+        }
+
+        .register-link {
+            text-align: center;
+            font-size: 13px;
+            color: #6c7a73;
+        }
+
+        .register-link a {
+            color: #00e676;
+            text-decoration: none;
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        .error-message {
+            background: #fee;
+            border: 1px solid #e74c3c;
+            border-radius: 12px;
+            padding: 12px;
+            margin-bottom: 20px;
+            font-size: 13px;
+            color: #c0392b;
+            text-align: center;
+        }
+
+        .loading-spinner {
+            display: inline-block;
+            width: 16px;
+            height: 16px;
+            border: 2px solid rgba(255,255,255,0.3);
+            border-radius: 50%;
+            border-top-color: white;
+            animation: spin 0.6s linear infinite;
+            margin-right: 8px;
+            vertical-align: middle;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        /* ========== DASHBOARD STYLES ========== */
+        .dashboard-container {
+            max-width: 600px;
+            margin: 0 auto;
+            background: var(--bg-white);
+            min-height: 100vh;
+            padding-bottom: 80px;
+        }
+
+        .dashboard-header {
+            background: var(--bg-white);
+            padding: 24px;
+            border-bottom: 1px solid #eef2f0;
+        }
+
+        .welcome-section h1 {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--primary-dark);
+            margin-bottom: 4px;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 12px;
+            margin-top: 24px;
+        }
+
+        .stat-card {
+            background: var(--bg-white);
+            border-radius: var(--radius-md);
+            padding: 16px 12px;
+            text-align: center;
+            border: 1px solid #eef2f0;
+        }
+
+        .stat-value {
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--primary-dark);
+        }
+
+        .stat-label {
+            font-size: 10px;
+            color: var(--text-muted);
+            margin-top: 6px;
+            font-weight: 700;
+            text-transform: uppercase;
+        }
+
+        .main-content {
+            padding: 24px;
+        }
+
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .section-header h2 {
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--primary-dark);
+        }
+
+        .wallet-card {
+            background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary-light) 100%);
+            border-radius: var(--radius-lg);
+            padding: 32px 24px;
+            text-align: center;
+            color: white;
+            margin-bottom: 28px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .balance-label {
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            opacity: 0.8;
+            margin-bottom: 8px;
+        }
+
+        .balance-amount {
+            font-size: 42px;
+            font-weight: 800;
+            margin-bottom: 20px;
+        }
+
+        .wallet-actions {
+            display: flex;
+            gap: 12px;
+            justify-content: center;
+        }
+
+        .btn-secondary {
+            background: rgba(255,255,255,0.2);
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 40px;
+            font-size: 13px;
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        .btn-outline {
+            background: transparent;
+            border: 1px solid rgba(255,255,255,0.5);
+            color: white;
+            padding: 12px 24px;
+            border-radius: 40px;
+            font-size: 13px;
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        .project-card {
+            background: var(--bg-white);
+            border-radius: var(--radius-lg);
+            margin-bottom: 20px;
+            border: 1px solid #eef2f0;
+            overflow: hidden;
+            cursor: pointer;
+        }
+
+        .project-image {
+            width: 100%;
+            height: 160px;
+            object-fit: cover;
+            background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary-light) 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 48px;
+        }
+
+        .project-content {
+            padding: 20px;
+        }
+
+        .project-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 12px;
+        }
+
+        .project-title {
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--primary-dark);
+        }
+
+        .project-sector {
+            display: inline-block;
+            background: #eef2f0;
+            color: var(--primary-light);
+            padding: 4px 12px;
+            border-radius: 30px;
+            font-size: 11px;
+            font-weight: 600;
+        }
+
+        .gain-score {
+            background: linear-gradient(135deg, #ffd700, #ffed4e);
+            color: #8b6914;
+            padding: 6px 14px;
+            border-radius: 30px;
+            font-size: 14px;
+            font-weight: 800;
+        }
+
+        .metrics-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 12px;
+            margin: 16px 0;
+            padding: 12px 0;
+            border-top: 1px solid #eef2f0;
+            border-bottom: 1px solid #eef2f0;
+        }
+
+        .metric {
+            text-align: center;
+        }
+
+        .metric-value {
+            font-size: 18px;
+            font-weight: 800;
+            color: var(--primary-dark);
+        }
+
+        .metric-value.return {
+            color: var(--accent-green);
+        }
+
+        .metric-label {
+            font-size: 10px;
+            color: var(--text-muted);
+            margin-top: 4px;
+        }
+
+        .progress-section {
+            margin: 16px 0;
+        }
+
+        .progress-labels {
+            display: flex;
+            justify-content: space-between;
+            font-size: 12px;
+            margin-bottom: 8px;
+        }
+
+        .progress-bar-container {
+            background: #eef2f0;
+            border-radius: 10px;
+            height: 8px;
+            overflow: hidden;
+        }
+
+        .progress-bar {
+            background: linear-gradient(90deg, var(--accent-green) 0%, var(--accent-neon) 100%);
+            height: 100%;
+            border-radius: 10px;
+            transition: width 0.4s ease;
+        }
+
+        .project-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 16px;
+        }
+
+        .invest-btn {
+            background: var(--primary-dark);
+            color: white;
+            border: none;
+            padding: 8px 20px;
+            border-radius: 30px;
+            font-size: 13px;
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        .bottom-nav {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            max-width: 600px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.98);
+            backdrop-filter: blur(20px);
+            display: flex;
+            padding: 10px 20px 22px;
+            border-top: 1px solid #eef2f0;
+        }
+
+        .nav-item {
+            flex: 1;
+            background: none;
+            border: none;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 4px;
+            cursor: pointer;
+            padding: 8px;
+            border-radius: 40px;
+            color: var(--text-muted);
+            font-size: 11px;
+            font-weight: 600;
+        }
+
+        .nav-item.active {
+            color: var(--accent-green);
+            background: rgba(0, 230, 118, 0.08);
+        }
+
+        .nav-icon {
+            font-size: 22px;
+        }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        .investment-item {
+            background: var(--bg-white);
+            border-radius: var(--radius-md);
+            padding: 16px;
+            margin-bottom: 12px;
+            border: 1px solid #eef2f0;
+        }
+
+        .investment-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .investment-title {
+            font-weight: 700;
+            color: var(--primary-dark);
+        }
+
+        .impact-card {
+            background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary-light) 100%);
+            border-radius: var(--radius-lg);
+            padding: 32px 24px;
+            text-align: center;
+            color: white;
+        }
+
+        .impact-value {
+            font-size: 42px;
+            font-weight: 800;
+        }
+
+        .impact-label {
+            font-size: 12px;
+            opacity: 0.8;
+            margin-top: 6px;
+        }
+
+        .profile-card {
+            background: var(--bg-white);
+            border-radius: var(--radius-lg);
+            padding: 24px;
+            border: 1px solid #eef2f0;
+        }
+
+        .profile-field {
+            display: flex;
+            justify-content: space-between;
+            padding: 14px 0;
+            border-bottom: 1px solid #eef2f0;
+        }
+
+        .profile-field:last-child {
+            border-bottom: none;
+        }
+
+        .modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(4px);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+        }
+
+        .modal-content {
+            background: var(--bg-white);
+            border-radius: var(--radius-lg);
+            padding: 28px;
+            width: 90%;
+            max-width: 380px;
+        }
+
+        .close-btn {
+            float: right;
+            font-size: 24px;
+            cursor: pointer;
+            color: var(--text-muted);
+        }
+
+        .toast {
+            position: fixed;
+            bottom: 80px;
+            left: 20px;
+            right: 20px;
+            background: var(--primary-dark);
+            color: white;
+            padding: 14px 20px;
+            border-radius: 60px;
+            text-align: center;
+            font-size: 13px;
+            z-index: 1000;
+            animation: slideUp 0.3s ease;
+        }
+
+        .toast.success {
+            background: var(--accent-green);
+            color: var(--primary-dark);
+        }
+
+        .toast.error {
+            background: #e74c3c;
+        }
+
+        @keyframes slideUp {
+            from { transform: translateY(20px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: 60px 20px;
+            color: var(--text-muted);
+        }
+
+        @media (max-width: 480px) {
+            .login-card {
+                padding: 32px 24px;
+            }
+        }
+    </style>
+</head>
+<body class="login-body">
+    <!-- LOGIN SCREEN -->
+    <div id="login-screen">
+        <div class="login-container">
+            <div class="login-card">
+                <div class="logo">
+                    <h1>GAIN<span>.</span></h1>
+                    <p>Green Africa Investment Network</p>
+                </div>
+
+                <div class="registered-text">
+                    <h2>Already registered?</h2>
+                    <p>Login with your credentials</p>
+                </div>
+
+                <div id="login-error" style="display: none;" class="error-message"></div>
+
+                <form id="login-form" novalidate>
+                    <div class="form-group">
+                        <label>E-Mail</label>
+                        <input type="email" id="login-email" placeholder="E-Mail" autocomplete="email" value="admin@ener2crowd.africa">
+                    </div>
+
+                    <div class="form-group">
+                        <label>Password</label>
+                        <input type="password" id="login-password" placeholder="Password" autocomplete="current-password" value="Admin123!">
+                    </div>
+
+                    <div class="forgot-link">
+                        <a href="#" onclick="showForgotPassword()">Forgot your password?</a>
+                    </div>
+
+                    <button type="submit" class="btn-login" id="loginBtn">LOGIN</button>
+                </form>
+
+                <div class="language-selector">
+                    <span class="active">A English</span>
+                </div>
+
+                <div class="register-link">
+                    Don't you have an account? <a href="signup.html">Register</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- DASHBOARD (hidden until login) -->
+    <div id="dashboard" style="display: none;">
+        <div class="dashboard-container">
+            <div class="dashboard-header">
+                <div class="welcome-section">
+                    <h1 id="welcome-name">Welcome back</h1>
+                    <p>Track your impact</p>
+                </div>
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-value" id="stat-invested">KES 0</div>
+                        <div class="stat-label">Invested</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-value" id="stat-return">0%</div>
+                        <div class="stat-label">Return</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-value" id="stat-co2">0</div>
+                        <div class="stat-label">CO₂ tons</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="main-content">
+                <div id="projects-tab" class="tab-content active">
+                    <div class="section-header">
+                        <h2>📋 Active projects</h2>
+                    </div>
+                    <div id="projects-list">Loading...</div>
+                </div>
+
+                <div id="portfolio-tab" class="tab-content">
+                    <div class="section-header">
+                        <h2>💰 Your portfolio</h2>
+                    </div>
+                    <div id="portfolio-list">No investments yet</div>
+                </div>
+
+                <div id="wallet-tab" class="tab-content">
+                    <div class="wallet-card">
+                        <div class="balance-label">Available balance</div>
+                        <div class="balance-amount" id="wallet-balance">KES 0</div>
+                        <div class="wallet-actions">
+                            <button class="btn-secondary" onclick="showDeposit()">Add funds</button>
+                            <button class="btn-outline" onclick="withdraw()">Withdraw</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="impact-tab" class="tab-content">
+                    <div class="section-header">
+                        <h2>🌱 Environmental impact</h2>
+                    </div>
+                    <div class="impact-card">
+                        <div class="impact-value" id="impact-co2">0</div>
+                        <div class="impact-label">tons CO₂ avoided</div>
+                    </div>
+                </div>
+
+                <div id="profile-tab" class="tab-content">
+                    <div class="section-header">
+                        <h2>👤 Account</h2>
+                    </div>
+                    <div class="profile-card">
+                        <div class="profile-field">
+                            <label>Name</label>
+                            <span id="profile-name">-</span>
+                        </div>
+                        <div class="profile-field">
+                            <label>Email</label>
+                            <span id="profile-email">-</span>
+                        </div>
+                        <div class="profile-field">
+                            <label>Phone</label>
+                            <span id="profile-phone">-</span>
+                        </div>
+                        <div class="profile-field">
+                            <label>KYC status</label>
+                            <span id="profile-kyc">-</span>
+                        </div>
+                        <button class="btn-login" onclick="logout()" style="margin-top: 20px; width: 100%;">Sign out</button>
+                    </div>
+                </div>
+            </div>
+
+            <nav class="bottom-nav">
+                <button class="nav-item active" onclick="switchTab('projects')"><span class="nav-icon">📋</span><span>Projects</span></button>
+                <button class="nav-item" onclick="switchTab('portfolio')"><span class="nav-icon">💰</span><span>Portfolio</span></button>
+                <button class="nav-item" onclick="switchTab('wallet')"><span class="nav-icon">👛</span><span>Wallet</span></button>
+                <button class="nav-item" onclick="switchTab('impact')"><span class="nav-icon">🌱</span><span>Impact</span></button>
+                <button class="nav-item" onclick="switchTab('profile')"><span class="nav-icon">👤</span><span>Account</span></button>
+            </nav>
+        </div>
+    </div>
+
+    <!-- Investment Modal -->
+    <div id="invest-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeInvestModal()">✕</span>
+            <h3 style="margin-bottom: 20px;">Invest in <span id="invest-project-name"></span></h3>
+            <div class="form-group">
+                <label>Amount (KES)</label>
+                <input type="number" id="invest-amount" placeholder="Enter amount">
+            </div>
+            <button class="btn-login" onclick="confirmInvestment()" style="width: 100%;">Confirm Investment</button>
+        </div>
+    </div>
+
+    <!-- Deposit Modal -->
+    <div id="deposit-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeDepositModal()">✕</span>
+            <h3 style="margin-bottom: 20px;">Add funds via M-Pesa</h3>
+            <div class="form-group">
+                <label>Amount (KES)</label>
+                <input type="number" id="deposit-amount" placeholder="Enter amount">
+            </div>
+            <div class="form-group">
+                <label>Phone number</label>
+                <input type="tel" id="deposit-phone" placeholder="254XXXXXXXXX">
+            </div>
+            <button class="btn-login" onclick="confirmDeposit()" style="width: 100%;">Pay with M-Pesa</button>
+        </div>
+    </div>
+
+    <script>
+        const API_URL = 'http://localhost:3000/api';
+        let currentToken = null;
+        let currentUser = null;
+        let selectedProject = null;
+
+        // Check for email from signup redirect
+        const urlParams = new URLSearchParams(window.location.search);
+        const emailParam = urlParams.get('email');
+        if (emailParam) {
+            document.getElementById('login-email').value = emailParam;
+        }
+
+        // Check saved token on load
+        const savedToken = localStorage.getItem('token');
+        if (savedToken) {
+            currentToken = savedToken;
+            verifyToken();
+        }
+
+        async function verifyToken() {
+            try {
+                const res = await fetch(`${API_URL}/auth/me`, {
+                    headers: { 'Authorization': `Bearer ${currentToken}` }
+                });
+                if (res.ok) {
+                    const data = await res.json();
+                    currentUser = data.user;
+                    showDashboard();
+                    loadProjects();
+                    loadWallet();
+                    loadProfile();
+                    document.getElementById('welcome-name').innerText = `Hello, ${currentUser.firstName}`;
+                } else {
+                    localStorage.removeItem('token');
+                    showLogin();
+                }
+            } catch(e) {
+                showLogin();
+            }
+        }
+
+        function showLogin() {
+            document.getElementById('login-screen').style.display = 'block';
+            document.getElementById('dashboard').style.display = 'none';
+            document.body.className = 'login-body';
+        }
+
+        function showDashboard() {
+            document.getElementById('login-screen').style.display = 'none';
+            document.getElementById('dashboard').style.display = 'block';
+            document.body.className = '';
+        }
+
+        // Login handler
+        const loginForm = document.getElementById('login-form');
+        loginForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            const email = document.getElementById('login-email').value.trim();
+            const password = document.getElementById('login-password').value;
+            const loginBtn = document.getElementById('loginBtn');
+            const errorDiv = document.getElementById('login-error');
+            
+            errorDiv.style.display = 'none';
+            
+            if (!email || !password) {
+                errorDiv.textContent = 'Please enter email and password';
+                errorDiv.style.display = 'block';
+                return;
+            }
+            
+            loginBtn.disabled = true;
+            loginBtn.innerHTML = '<span class="loading-spinner"></span> LOGGING IN...';
+            
+            try {
+                const response = await fetch(`${API_URL}/auth/login`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ email, password })
+                });
+                
+                const data = await response.json();
+                
+                if (data.success) {
+                    currentToken = data.token;
+                    currentUser = data.user;
+                    localStorage.setItem('token', data.token);
+                    localStorage.setItem('user', JSON.stringify(data.user));
+                    showDashboard();
+                    loadProjects();
+                    loadWallet();
+                    loadProfile();
+                    document.getElementById('welcome-name').innerText = `Hello, ${currentUser.firstName}`;
+                    showToast('Logged in successfully!', 'success');
+                } else {
+                    errorDiv.textContent = data.error || data.message || 'Invalid email or password';
+                    errorDiv.style.display = 'block';
+                    loginBtn.disabled = false;
+                    loginBtn.innerHTML = 'LOGIN';
+                }
+            } catch (error) {
+                errorDiv.textContent = 'Cannot connect to server. Make sure backend is running on port 3000';
+                errorDiv.style.display = 'block';
+                loginBtn.disabled = false;
+                loginBtn.innerHTML = 'LOGIN';
+            }
+        });
+
+        function showForgotPassword() {
+            alert('Please contact support@ener2crowd.africa to reset your password.');
+        }
+
+        function logout() {
+            localStorage.removeItem('token');
+            currentToken = null;
+            currentUser = null;
+            showLogin();
+            showToast('Signed out', 'success');
+        }
+
+        function switchTab(tabName) {
+            document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
+            document.getElementById(`${tabName}-tab`).classList.add('active');
+            document.querySelectorAll('.nav-item').forEach(btn => btn.classList.remove('active'));
+            event.target.closest('.nav-item').classList.add('active');
+            
+            if (tabName === 'portfolio') loadPortfolio();
+            if (tabName === 'wallet') loadWallet();
+            if (tabName === 'impact') loadImpact();
+        }
+
+        async function loadProjects() {
+            const container = document.getElementById('projects-list');
+            container.innerHTML = '<div class="empty-state">Loading projects...</div>';
+            
+            try {
+                const res = await fetch(`${API_URL}/projects`);
+                const data = await res.json();
+                
+                if (data.success && data.projects.length > 0) {
+                    container.innerHTML = data.projects.map(p => {
+                        const percentage = ((p.currentAmount / p.goalAmount) * 100).toFixed(1);
+                        const icons = { 'solar': '☀️', 'e-mobility': '⚡', 'green-hydrogen': '💧', 'carbon-credits': '🌿' };
+                        const icon = icons[p.sector?.toLowerCase()] || '🔋';
+                        
+                        return `
+                            <div class="project-card" onclick="openInvestModal(${p.id}, '${p.title}', ${p.expectedReturnPercent || 12})">
+                                <div class="project-image">${icon}</div>
+                                <div class="project-content">
+                                    <div class="project-header">
+                                        <div>
+                                            <div class="project-title">${p.title}</div>
+                                            <span class="project-sector">${p.sector}</span>
+                                        </div>
+                                        <div class="gain-score">GAIN ${p.gainScore || 'A'}</div>
+                                    </div>
+                                    <div class="metrics-grid">
+                                        <div class="metric">
+                                            <div class="metric-value return">${p.expectedReturnPercent || 12}%</div>
+                                            <div class="metric-label">Return</div>
+                                        </div>
+                                        <div class="metric">
+                                            <div class="metric-value">KES ${(p.currentAmount || 0).toLocaleString()}</div>
+                                            <div class="metric-label">Raised</div>
+                                        </div>
+                                        <div class="metric">
+                                            <div class="metric-value">KES ${p.goalAmount.toLocaleString()}</div>
+                                            <div class="metric-label">Target</div>
+                                        </div>
+                                    </div>
+                                    <div class="progress-section">
+                                        <div class="progress-labels">
+                                            <span>Funding Progress</span>
+                                            <span>${percentage}%</span>
+                                        </div>
+                                        <div class="progress-bar-container">
+                                            <div class="progress-bar" style="width: ${percentage}%"></div>
+                                        </div>
+                                    </div>
+                                    <div class="project-footer">
+                                        <span>📍 ${p.location || 'Kenya'}</span>
+                                        <button class="invest-btn" onclick="event.stopPropagation(); openInvestModal(${p.id}, '${p.title}', ${p.expectedReturnPercent || 12})">Invest Now →</button>
+                                    </div>
+                                </div>
+                            </div>
+                        `;
+                    }).join('');
+                } else {
+                    container.innerHTML = '<div class="empty-state">No projects available yet. Check back soon!</div>';
+                }
+            } catch(e) {
+                container.innerHTML = '<div class="empty-state">Failed to load projects. Please refresh.</div>';
+            }
+        }
+
+        function openInvestModal(projectId, projectName, returnRate) {
+            selectedProject = { id: projectId, name: projectName, returnRate: returnRate };
+            document.getElementById('invest-project-name').innerText = projectName;
+            document.getElementById('invest-modal').style.display = 'flex';
+        }
+
+        function closeInvestModal() {
+            document.getElementById('invest-modal').style.display = 'none';
+            document.getElementById('invest-amount').value = '';
+        }
+
+        async function confirmInvestment() {
+            const amount = parseInt(document.getElementById('invest-amount').value);
+            
+            if (!amount || amount < 10) {
+                showToast('Minimum investment is KES 10', 'error');
+                return;
+            }
+            if (amount > 100000) {
+                showToast('Maximum investment is KES 100,000 (CMA regulation)', 'error');
+                return;
+            }
+            
+            const currentBalance = currentUser?.walletBalance || 0;
+            if (amount > currentBalance) {
+                showToast(`Insufficient balance! You have KES ${currentBalance.toLocaleString()}`, 'error');
+                return;
+            }
+            
+            try {
+                const response = await fetch(`${API_URL}/investments`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${currentToken}`
+                    },
+                    body: JSON.stringify({
+                        projectId: selectedProject.id,
+                        amount: amount,
+                        phoneNumber: currentUser.phoneNumber
+                    })
+                });
+                
+                const data = await response.json();
+                
+                if (data.success) {
+                    showToast(`✅ Investment of KES ${amount.toLocaleString()} successful!`, 'success');
+                    closeInvestModal();
+                    await loadWallet();
+                    await loadProjects();
+                    await loadPortfolio();
+                    await loadImpact();
+                } else {
+                    showToast('Investment failed: ' + data.error, 'error');
+                }
+            } catch(e) {
+                showToast('Investment failed. Please try again.', 'error');
+            }
+        }
+
+        async function loadWallet() {
+            try {
+                const response = await fetch(`${API_URL}/wallet/balance`, {
+                    headers: { 'Authorization': `Bearer ${currentToken}` }
+                });
+                const data = await response.json();
+                if (data.success) {
+                    document.getElementById('wallet-balance').innerHTML = `KES ${data.balance.toLocaleString()}`;
+                    if (currentUser) currentUser.walletBalance = data.balance;
+                }
+            } catch(e) { console.error('Wallet error:', e); }
+        }
+
+        function showDeposit() {
+            document.getElementById('deposit-modal').style.display = 'flex';
+        }
+
+        function closeDepositModal() {
+            document.getElementById('deposit-modal').style.display = 'none';
+            document.getElementById('deposit-amount').value = '';
+            document.getElementById('deposit-phone').value = '';
+        }
+
+        async function confirmDeposit() {
+            const amount = parseInt(document.getElementById('deposit-amount').value);
+            let phone = document.getElementById('deposit-phone').value;
+            phone = phone.replace(/^0/, '254');
+            
+            if (!amount || amount < 10) {
+                showToast('Minimum deposit is KES 10', 'error');
+                return;
+            }
+            
+            try {
+                const response = await fetch(`${API_URL}/wallet/deposit`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${currentToken}`
+                    },
+                    body: JSON.stringify({ amount, phoneNumber: phone })
+                });
+                
+                const data = await response.json();
+                
+                if (data.success) {
+                    showToast(`KES ${amount.toLocaleString()} deposited!`, 'success');
+                    closeDepositModal();
+                    await loadWallet();
+                } else {
+                    showToast('Deposit failed: ' + data.error, 'error');
+                }
+            } catch(e) {
+                showToast('Deposit failed. Please try again.', 'error');
+            }
+        }
+
+        async function withdraw() {
+            const amount = prompt('Enter amount to withdraw (KES):\nMinimum KES 100');
+            if (!amount) return;
+            
+            const withdrawAmount = parseInt(amount);
+            if (withdrawAmount < 100) {
+                showToast('Minimum withdrawal is KES 100', 'error');
+                return;
+            }
+            
+            try {
+                const response = await fetch(`${API_URL}/wallet/withdraw`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${currentToken}`
+                    },
+                    body: JSON.stringify({ amount: withdrawAmount, phoneNumber: currentUser.phoneNumber })
+                });
+                
+                const data = await response.json();
+                
+                if (data.success) {
+                    showToast(`KES ${withdrawAmount.toLocaleString()} withdrawn!`, 'success');
+                    await loadWallet();
+                } else {
+                    showToast('Withdrawal failed: ' + data.error, 'error');
+                }
+            } catch(e) {
+                showToast('Withdrawal failed. Please try again.', 'error');
+            }
+        }
+
+        async function loadPortfolio() {
+            const container = document.getElementById('portfolio-list');
+            try {
+                const res = await fetch(`${API_URL}/investments/me`, {
+                    headers: { 'Authorization': `Bearer ${currentToken}` }
+                });
+                const data = await res.json();
+                
+                if (data.success && data.investments.length > 0) {
+                    const total = data.investments.reduce((s, i) => s + i.amount, 0);
+                    container.innerHTML = `
+                        <div style="background: white; border-radius: 20px; padding: 20px; margin-bottom: 16px; border: 1px solid #eef2f0;">
+                            <div style="font-size: 28px; font-weight: 700;">KES ${total.toLocaleString()}</div>
+                            <div style="font-size: 12px; color: #6c7a73;">Total invested</div>
+                        </div>
+                        ${data.investments.map(i => `
+                            <div class="investment-item">
+                                <div class="investment-header">
+                                    <span class="investment-title">${i.projectTitle}</span>
+                                    <span class="investment-status">${i.status}</span>
+                                </div>
+                                <div>KES ${i.amount.toLocaleString()}</div>
+                                <div style="font-size: 11px; color: #6c7a73; margin-top: 6px;">${new Date(i.createdAt).toLocaleDateString()}</div>
+                            </div>
+                        `).join('')}
+                    `;
+                } else {
+                    container.innerHTML = '<div class="empty-state">No investments yet</div>';
+                }
+            } catch(e) {
+                container.innerHTML = '<div class="empty-state">Failed to load portfolio</div>';
+            }
+        }
+
+        async function loadImpact() {
+            try {
+                const res = await fetch(`${API_URL}/investments/me`, {
+                    headers: { 'Authorization': `Bearer ${currentToken}` }
+                });
+                const data = await res.json();
+                
+                let total = 0;
+                if (data.success && data.investments) {
+                    total = data.investments.reduce((s, i) => s + i.amount, 0);
+                }
+                
+                const co2 = (total / 50000).toFixed(1);
+                document.getElementById('impact-co2').innerHTML = co2;
+                document.getElementById('stat-co2').innerHTML = co2;
+                document.getElementById('stat-invested').innerHTML = `KES ${total.toLocaleString()}`;
+            } catch(e) { console.error('Impact error:', e); }
+        }
+
+        function loadProfile() {
+            document.getElementById('profile-name').innerHTML = `${currentUser.firstName} ${currentUser.lastName}`;
+            document.getElementById('profile-email').innerHTML = currentUser.email;
+            document.getElementById('profile-phone').innerHTML = currentUser.phoneNumber;
+            const kycStatus = currentUser.kycStatus === 'verified' ? '✅ Verified' : currentUser.kycStatus === 'pending' ? '⏳ Pending' : 'Not submitted';
+            document.getElementById('profile-kyc').innerHTML = kycStatus;
+        }
+
+        function showToast(msg, type) {
+            const toast = document.createElement('div');
+            toast.className = `toast ${type}`;
+            toast.innerText = msg;
+            document.body.appendChild(toast);
+            setTimeout(() => toast.remove(), 3000);
+        }
+    </script>
+</body>
+</html>

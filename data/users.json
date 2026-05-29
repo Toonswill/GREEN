@@ -11,5 +11,18 @@
     "createdAt": "2026-05-28T15:49:30.665Z",
     "updatedAt": "2026-05-28T16:52:10.371Z",
     "id": 1
+  },
+  {
+    "firstName": "System",
+    "lastName": "Admin",
+    "email": "admin@gain.com",
+    "phoneNumber": "254700000000",
+    "password": "$2b$10$S9.rq4KrK5OWgwyJ.pS2Euh/UiekillTc4AqP7doTLluNEcp97Lzu",
+    "role": "admin",
+    "kycStatus": "verified",
+    "walletBalance": 0,
+    "createdAt": "2026-05-29T06:40:26.589Z",
+    "updatedAt": "2026-05-29T06:40:26.589Z",
+    "id": 2
   }
 ]

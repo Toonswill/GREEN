@@ -1,0 +1,775 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>Sign Up | GAIN - Green Africa Investment Network</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, sans-serif;
+            background: #f5f7f6;
+            min-height: 100vh;
+        }
+
+        /* Main Container */
+        .signup-container {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            background: linear-gradient(135deg, #f5f7f6 0%, #e8edea 100%);
+        }
+
+        .signup-card {
+            background: white;
+            border-radius: 32px;
+            padding: 32px 24px;
+            width: 100%;
+            max-width: 500px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.05);
+            border: 1px solid rgba(0, 230, 118, 0.1);
+        }
+
+        /* Header */
+        .logo {
+            text-align: center;
+            margin-bottom: 24px;
+        }
+
+        .logo h1 {
+            font-size: 28px;
+            color: #0a2e24;
+            letter-spacing: -0.5px;
+        }
+
+        .logo span {
+            color: #00e676;
+        }
+
+        .logo p {
+            font-size: 14px;
+            color: #6c7a73;
+            margin-top: 4px;
+        }
+
+        .tagline {
+            text-align: center;
+            margin-bottom: 28px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid #eef2f0;
+        }
+
+        .tagline h2 {
+            font-size: 20px;
+            color: #1a2e24;
+            margin-bottom: 6px;
+        }
+
+        .tagline p {
+            font-size: 13px;
+            color: #6c7a73;
+        }
+
+        /* Form */
+        .form-group {
+            margin-bottom: 18px;
+        }
+
+        .form-row {
+            display: flex;
+            gap: 12px;
+            margin-bottom: 0;
+        }
+
+        .form-row .form-group {
+            flex: 1;
+            margin-bottom: 18px;
+        }
+
+        label {
+            display: block;
+            font-size: 13px;
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: #1a2e24;
+        }
+
+        label .required {
+            color: #e74c3c;
+            margin-left: 2px;
+        }
+
+        input, select {
+            width: 100%;
+            padding: 14px 16px;
+            border: 1.5px solid #e2e8f0;
+            border-radius: 14px;
+            font-size: 16px;
+            font-family: inherit;
+            background: white;
+            transition: all 0.2s;
+        }
+
+        input:focus, select:focus {
+            outline: none;
+            border-color: #00e676;
+            box-shadow: 0 0 0 3px rgba(0, 230, 118, 0.1);
+        }
+
+        input.error, select.error {
+            border-color: #e74c3c;
+            background: #fff5f5;
+        }
+
+        /* Password field with toggle */
+        .password-wrapper {
+            position: relative;
+        }
+
+        .password-toggle {
+            position: absolute;
+            right: 16px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-size: 18px;
+            padding: 0;
+            color: #6c7a73;
+        }
+
+        /* Checkboxes */
+        .checkbox-group {
+            margin-bottom: 16px;
+        }
+
+        .checkbox-label {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            cursor: pointer;
+            font-weight: normal;
+            font-size: 13px;
+            color: #4a5568;
+            line-height: 1.4;
+        }
+
+        .checkbox-label input {
+            width: 20px;
+            height: 20px;
+            margin-top: 1px;
+            flex-shrink: 0;
+            accent-color: #00e676;
+        }
+
+        .checkbox-label a {
+            color: #00e676;
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .checkbox-label a:active {
+            opacity: 0.7;
+        }
+
+        /* reCAPTCHA container */
+        .recaptcha-container {
+            margin: 20px 0;
+            display: flex;
+            justify-content: center;
+            transform: scale(0.95);
+        }
+
+        /* Sign Up Button */
+        .btn-signup {
+            width: 100%;
+            background: #0a2e24;
+            color: white;
+            border: none;
+            padding: 16px;
+            border-radius: 50px;
+            font-size: 16px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.2s;
+            margin-top: 8px;
+        }
+
+        .btn-signup:active {
+            background: #144d3e;
+            transform: scale(0.98);
+        }
+
+        .btn-signup:disabled {
+            background: #bdc5c1;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        /* Login link */
+        .login-link {
+            text-align: center;
+            margin-top: 24px;
+            padding-top: 20px;
+            border-top: 1px solid #eef2f0;
+            font-size: 14px;
+            color: #6c7a73;
+        }
+
+        .login-link a {
+            color: #00e676;
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        /* Error messages */
+        .error-message {
+            font-size: 11px;
+            color: #e74c3c;
+            margin-top: 6px;
+            display: block;
+        }
+
+        .general-error {
+            background: #fee;
+            border: 1px solid #e74c3c;
+            border-radius: 12px;
+            padding: 12px;
+            margin-bottom: 20px;
+            font-size: 13px;
+            color: #c0392b;
+            text-align: center;
+        }
+
+        .general-success {
+            background: #e8f5e9;
+            border: 1px solid #00e676;
+            border-radius: 12px;
+            padding: 12px;
+            margin-bottom: 20px;
+            font-size: 13px;
+            color: #0a2e24;
+            text-align: center;
+        }
+
+        /* Loading state */
+        .loading-spinner {
+            display: inline-block;
+            width: 18px;
+            height: 18px;
+            border: 2px solid rgba(255,255,255,0.3);
+            border-radius: 50%;
+            border-top-color: white;
+            animation: spin 0.6s linear infinite;
+            margin-right: 8px;
+            vertical-align: middle;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        /* Country select styling */
+        select {
+            appearance: none;
+            background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%236c7a73' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+            background-repeat: no-repeat;
+            background-position: right 16px center;
+            background-size: 16px;
+        }
+
+        /* Responsive */
+        @media (max-width: 480px) {
+            .signup-card {
+                padding: 24px 20px;
+            }
+            
+            .form-row {
+                flex-direction: column;
+                gap: 0;
+            }
+            
+            .recaptcha-container {
+                transform: scale(0.85);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="signup-container">
+        <div class="signup-card">
+            <div class="logo">
+                <h1>GAIN<span>.</span></h1>
+                <p>Green Africa Investment Network</p>
+            </div>
+            <div class="tagline">
+                <h2>Create your account</h2>
+                <p>You are about to become a green investor</p>
+
+            <div id="message-area"></div>
+
+            <form id="signup-form" novalidate>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>First name <span class="required">*</span></label>
+                        <input type="text" id="firstName" name="firstName" placeholder="John" autocomplete="given-name">
+                        <span class="error-message" id="firstName-error"></span>
+                    </div>
+                    <div class="form-group">
+                        <label>Surname <span class="required">*</span></label>
+                        <input type="text" id="surname" name="surname" placeholder="Doe" autocomplete="family-name">
+                        <span class="error-message" id="surname-error"></span>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label>Country of Residence <span class="required">*</span></label>
+                    <select id="country" name="country">
+                        <option value="">Select your country</option>
+                        <option value="Kenya">🇰🇪 Kenya</option>
+                        <option value="Nigeria">🇳🇬 Nigeria</option>
+                        <option value="South Africa">🇿🇦 South Africa</option>
+                        <option value="Ghana">🇬🇭 Ghana</option>
+                        <option value="Rwanda">🇷🇼 Rwanda</option>
+                        <option value="Uganda">🇺🇬 Uganda</option>
+                        <option value="Tanzania">🇹🇿 Tanzania</option>
+                        <option value="Ethiopia">🇪🇹 Ethiopia</option>
+                        <option value="Egypt">🇪🇬 Egypt</option>
+                        <option value="Morocco">🇲🇦 Morocco</option>
+                        <option value="Other">🌍 Other</option>
+                    </select>
+                    <span class="error-message" id="country-error"></span>
+                </div>
+
+                <div class="form-group">
+                    <label>Email <span class="required">*</span></label>
+                    <input type="email" id="email" name="email" placeholder="john@example.com" autocomplete="email">
+                    <span class="error-message" id="email-error"></span>
+                </div>
+
+                <div class="form-group">
+                    <label>Phone number <span class="required">*</span></label>
+                    <input type="tel" id="phone" name="phone" placeholder="254712345678" autocomplete="tel">
+                    <span class="error-message" id="phone-error"></span>
+                    <span style="font-size: 11px; color: #6c7a73;">Format: 254XXXXXXXXX (without +)</span>
+                </div>
+
+                <div class="form-group">
+                    <label>Password <span class="required">*</span></label>
+                    <div class="password-wrapper">
+                        <input type="password" id="password" name="password" placeholder="Create a strong password" autocomplete="new-password">
+                        <button type="button" class="password-toggle" onclick="togglePassword('password')">👁️</button>
+                    </div>
+                    <span class="error-message" id="password-error"></span>
+                    <span style="font-size: 11px; color: #6c7a73;">Min 8 characters, at least 1 number</span>
+                </div>
+
+                <div class="form-group">
+                    <label>Confirm password <span class="required">*</span></label>
+                    <div class="password-wrapper">
+                        <input type="password" id="confirmPassword" name="confirmPassword" placeholder="Confirm your password" autocomplete="off">
+                        <button type="button" class="password-toggle" onclick="togglePassword('confirmPassword')">👁️</button>
+                    </div>
+                    <span class="error-message" id="confirmPassword-error"></span>
+                </div>
+
+                <div class="form-group">
+                    <label>How did you hear about us?</label>
+                    <select id="referralSource" name="referralSource">
+                        <option value="">Select an option</option>
+                        <option value="social">📱 Social Media (Twitter, LinkedIn, Facebook)</option>
+                        <option value="friend">👥 Friend or family referral</option>
+                        <option value="search">🔍 Google search</option>
+                        <option value="event">🎤 Climate event / conference</option>
+                        <option value="podcast">🎙️ Podcast or YouTube</option>
+                        <option value="news">📰 News article</option>
+                        <option value="other">💡 Other</option>
+                    </select>
+                </div>
+
+                <div class="checkbox-group">
+                    <label class="checkbox-label">
+                        <input type="checkbox" id="termsCheckbox">
+                        <span>I agree to the <a href="#" id="termsLink">Terms and Conditions</a> <span class="required">*</span></span>
+                    </label>
+                    <span class="error-message" id="terms-error"></span>
+                </div>
+
+                <div class="checkbox-group">
+                    <label class="checkbox-label">
+                        <input type="checkbox" id="dataProcessingCheckbox">
+                        <span>I consent to the <a href="#" id="dataProcessingLink">Data Processing Terms</a> <span class="required">*</span></span>
+                    </label>
+                    <span class="error-message" id="dataProcessing-error"></span>
+                </div>
+
+                <!-- reCAPTCHA v2 container -->
+                <div class="recaptcha-container">
+                    <div id="recaptcha-container"></div>
+                </div>
+                <span class="error-message" id="recaptcha-error" style="text-align: center; display: block;"></span>
+
+                <button type="submit" class="btn-signup" id="signupBtn">Create Account</button>
+            </form>
+
+            <div class="login-link">
+                Already have an account? <a href="#" id="loginLink">Sign in</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Google reCAPTCHA v2 -->
+    <script src="https://www.google.com/recaptcha/api.js?render=explicit" async defer></script>
+
+    <script>
+        // Configuration
+        const API_URL = 'https://green-ztje.onrender.com/api';
+        let recaptchaWidgetId = null;
+        let isSubmitting = false;
+
+        // ---------- Helper Functions ----------
+        function showMessage(message, isError = true) {
+            const messageArea = document.getElementById('message-area');
+            messageArea.innerHTML = `<div class="${isError ? 'general-error' : 'general-success'}">${message}</div>`;
+            setTimeout(() => {
+                if (messageArea.firstChild) messageArea.firstChild.remove();
+            }, 5000);
+        }
+
+        function clearFieldError(fieldId) {
+            const input = document.getElementById(fieldId);
+            if (input) input.classList.remove('error');
+            const errorSpan = document.getElementById(`${fieldId}-error`);
+            if (errorSpan) errorSpan.textContent = '';
+        }
+
+        function setFieldError(fieldId, message) {
+            const input = document.getElementById(fieldId);
+            if (input) input.classList.add('error');
+            const errorSpan = document.getElementById(`${fieldId}-error`);
+            if (errorSpan) errorSpan.textContent = message;
+        }
+
+        function togglePassword(fieldId) {
+            const field = document.getElementById(fieldId);
+            const type = field.type === 'password' ? 'text' : 'password';
+            field.type = type;
+        }
+
+        // Validate phone number (Kenyan format + international)
+        function validatePhone(phone) {
+            const phoneRegex = /^254[1-9]\d{8}$/;
+            if (!phone) return false;
+            const cleaned = phone.replace(/\s/g, '');
+            return phoneRegex.test(cleaned);
+        }
+
+        // Validate email
+        function validateEmail(email) {
+            const emailRegex = /^[^\s@]+@([^\s@.,]+\.)+[^\s@.,]{2,}$/;
+            return emailRegex.test(email);
+        }
+
+        // Validate password strength
+        function validatePassword(password) {
+            if (password.length < 8) return false;
+            if (!/\d/.test(password)) return false;
+            return true;
+        }
+
+        // Field validation
+        function validateField(fieldId, value) {
+            switch(fieldId) {
+                case 'firstName':
+                    if (!value || value.trim().length < 2) {
+                        setFieldError('firstName', 'First name is required (min 2 characters)');
+                        return false;
+                    }
+                    clearFieldError('firstName');
+                    return true;
+                    
+                case 'surname':
+                    if (!value || value.trim().length < 2) {
+                        setFieldError('surname', 'Surname is required (min 2 characters)');
+                        return false;
+                    }
+                    clearFieldError('surname');
+                    return true;
+                    
+                case 'country':
+                    if (!value) {
+                        setFieldError('country', 'Please select your country of residence');
+                        return false;
+                    }
+                    clearFieldError('country');
+                    return true;
+                    
+                case 'email':
+                    if (!value) {
+                        setFieldError('email', 'Email is required');
+                        return false;
+                    }
+                    if (!validateEmail(value)) {
+                        setFieldError('email', 'Please enter a valid email address');
+                        return false;
+                    }
+                    clearFieldError('email');
+                    return true;
+                    
+                case 'phone':
+                    if (!value) {
+                        setFieldError('phone', 'Phone number is required');
+                        return false;
+                    }
+                    if (!validatePhone(value)) {
+                        setFieldError('phone', 'Enter valid phone number (format: 254XXXXXXXXX)');
+                        return false;
+                    }
+                    clearFieldError('phone');
+                    return true;
+                    
+                case 'password':
+                    if (!value) {
+                        setFieldError('password', 'Password is required');
+                        return false;
+                    }
+                    if (!validatePassword(value)) {
+                        setFieldError('password', 'Password must be at least 8 characters with 1 number');
+                        return false;
+                    }
+                    clearFieldError('password');
+                    return true;
+                    
+                case 'confirmPassword':
+                    const password = document.getElementById('password').value;
+                    if (value !== password) {
+                        setFieldError('confirmPassword', 'Passwords do not match');
+                        return false;
+                    }
+                    clearFieldError('confirmPassword');
+                    return true;
+                    
+                default:
+                    return true;
+            }
+        }
+
+        // Validate all fields
+        function validateForm() {
+            let isValid = true;
+            
+            const fields = ['firstName', 'surname', 'country', 'email', 'phone', 'password', 'confirmPassword'];
+            fields.forEach(field => {
+                const value = document.getElementById(field).value;
+                if (!validateField(field, value)) isValid = false;
+            });
+            
+            // Check terms
+            const termsChecked = document.getElementById('termsCheckbox').checked;
+            if (!termsChecked) {
+                document.getElementById('terms-error').textContent = 'You must accept the Terms and Conditions';
+                isValid = false;
+            } else {
+                document.getElementById('terms-error').textContent = '';
+            }
+            
+            // Check data processing
+            const dataProcessingChecked = document.getElementById('dataProcessingCheckbox').checked;
+            if (!dataProcessingChecked) {
+                document.getElementById('dataProcessing-error').textContent = 'You must accept the Data Processing Terms';
+                isValid = false;
+            } else {
+                document.getElementById('dataProcessing-error').textContent = '';
+            }
+            
+            // Check reCAPTCHA
+            if (recaptchaWidgetId !== null) {
+                const recaptchaResponse = grecaptcha.getResponse(recaptchaWidgetId);
+                if (!recaptchaResponse) {
+                    document.getElementById('recaptcha-error').textContent = 'Please complete the reCAPTCHA';
+                    isValid = false;
+                } else {
+                    document.getElementById('recaptcha-error').textContent = '';
+                }
+            }
+            
+            return isValid;
+        }
+
+        // Real-time validation on blur
+        function attachValidationListeners() {
+            const fields = ['firstName', 'surname', 'country', 'email', 'phone', 'password', 'confirmPassword'];
+            fields.forEach(field => {
+                const input = document.getElementById(field);
+                if (input) {
+                    input.addEventListener('blur', function() {
+                        validateField(field, this.value);
+                    });
+                    input.addEventListener('input', function() {
+                        if (!this.classList.contains('error')) return;
+                        validateField(field, this.value);
+                    });
+                }
+            });
+            
+            // Checkboxes clear errors on click
+            document.getElementById('termsCheckbox').addEventListener('change', function() {
+                if (this.checked) document.getElementById('terms-error').textContent = '';
+            });
+            document.getElementById('dataProcessingCheckbox').addEventListener('change', function() {
+                if (this.checked) document.getElementById('dataProcessing-error').textContent = '';
+            });
+        }
+
+        // Initialize reCAPTCHA
+        function initRecaptcha() {
+            if (typeof grecaptcha !== 'undefined') {
+                recaptchaWidgetId = grecaptcha.render('recaptcha-container', {
+                    'sitekey': '6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI', // Google test key - replace with your actual key
+                    'theme': 'light',
+                    'size': 'normal'
+                });
+            } else {
+                console.log('reCAPTCHA not loaded yet, retrying...');
+                setTimeout(initRecaptcha, 500);
+            }
+        }
+
+        // Reset reCAPTCHA after submit
+        function resetRecaptcha() {
+            if (recaptchaWidgetId !== null && typeof grecaptcha !== 'undefined') {
+                grecaptcha.reset(recaptchaWidgetId);
+            }
+        }
+
+        // Handle signup submission
+        async function handleSignup(event) {
+            event.preventDefault();
+            
+            if (isSubmitting) return;
+            
+            // Validate form
+            if (!validateForm()) {
+                // Scroll to first error
+                const firstError = document.querySelector('.error-message:not(:empty)');
+                if (firstError) {
+                    firstError.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                }
+                return;
+            }
+            
+            isSubmitting = true;
+            const signupBtn = document.getElementById('signupBtn');
+            const originalText = signupBtn.innerHTML;
+            signupBtn.innerHTML = '<span class="loading-spinner"></span> Creating account...';
+            signupBtn.disabled = true;
+            
+            // Get reCAPTCHA token
+            let recaptchaToken = '';
+            if (recaptchaWidgetId !== null && typeof grecaptcha !== 'undefined') {
+                recaptchaToken = grecaptcha.getResponse(recaptchaWidgetId);
+            }
+            
+            // Prepare payload
+            const payload = {
+                firstName: document.getElementById('firstName').value.trim(),
+                surname: document.getElementById('surname').value.trim(),
+                country: document.getElementById('country').value,
+                email: document.getElementById('email').value.trim().toLowerCase(),
+                phoneNumber: document.getElementById('phone').value.trim(),
+                password: document.getElementById('password').value,
+                referralSource: document.getElementById('referralSource').value || null,
+                acceptedTerms: true,
+                acceptedDataProcessing: true,
+                recaptchaToken: recaptchaToken
+            };
+            
+            console.log('Submitting signup:', { ...payload, password: '[REDACTED]' });
+            
+            try {
+                const response = await fetch(`${API_URL}/auth/register`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(payload)
+                });
+                
+                const data = await response.json();
+                console.log('Server response:', data);
+                
+                if (data.success) {
+                    showMessage('🎉 Account created successfully! Redirecting to login...', false);
+                    
+                    // Store email for login prefill
+                    localStorage.setItem('signupEmail', payload.email);
+                    
+                    // Reset form
+                    document.getElementById('signup-form').reset();
+                    resetRecaptcha();
+                    
+                    // Redirect to login after 2 seconds
+                    setTimeout(() => {
+                        window.location.href = 'login.html';
+                    }, 2000);
+                } else {
+                    let errorMsg = data.error || data.message || 'Registration failed. Please try again.';
+                    
+                    // Handle specific field errors from server
+                    if (data.field === 'email') {
+                        setFieldError('email', errorMsg);
+                    } else if (data.field === 'phone') {
+                        setFieldError('phone', errorMsg);
+                    } else {
+                        showMessage(errorMsg, true);
+                    }
+                    
+                    resetRecaptcha();
+                }
+            } catch (error) {
+                console.error('Signup error:', error);
+                showMessage('Network error. Please check your connection and try again.', true);
+                resetRecaptcha();
+            } finally {
+                isSubmitting = false;
+                signupBtn.innerHTML = originalText;
+                signupBtn.disabled = false;
+            }
+        }
+
+        // ---------- Initialization ----------
+        document.addEventListener('DOMContentLoaded', function() {
+            attachValidationListeners();
+            initRecaptcha();
+            
+            // Form submission
+            const form = document.getElementById('signup-form');
+            form.addEventListener('submit', handleSignup);
+            
+            // Prefill email if coming from investment flow
+            const storedEmail = localStorage.getItem('signupEmail');
+            if (storedEmail) {
+                document.getElementById('email').value = storedEmail;
+                localStorage.removeItem('signupEmail');
+            }
+            
+            // Phone number formatting helper
+            const phoneInput = document.getElementById('phone');
+            phoneInput.addEventListener('input', function(e) {
+                let value = e.target.value.replace(/\D/g, '');
+                if (value.startsWith('0')) value = '254' + value.substring(1);
+                if (value.startsWith('254') && value.length > 12) value = value.substring(0, 12);
+                e.target.value = value;
+            });
+        });
+    </script>
+</body>
+</html>

@@ -3,61 +3,320 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-    <title>Ener2Crowd Africa | Invest in Climate Projects</title>
-    <link rel="stylesheet" href="style.css">
+    <title>GAIN | Green Africa Investment Network</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            background: linear-gradient(135deg, #f5f7f6 0%, #e8edea 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .login-container {
+            width: 100%;
+            max-width: 440px;
+        }
+
+        .login-card {
+            background: white;
+            border-radius: 32px;
+            padding: 48px 40px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.05);
+            border: 1px solid rgba(0, 230, 118, 0.1);
+        }
+
+        .logo {
+            text-align: center;
+            margin-bottom: 32px;
+        }
+
+        .logo h1 {
+            font-size: 36px;
+            color: #0a2e24;
+            letter-spacing: -0.5px;
+        }
+
+        .logo span {
+            color: #00e676;
+        }
+
+        .logo p {
+            font-size: 13px;
+            color: #6c7a73;
+            margin-top: 4px;
+        }
+
+        .registered-text {
+            text-align: center;
+            margin-bottom: 28px;
+        }
+
+        .registered-text h2 {
+            font-size: 24px;
+            font-weight: 700;
+            color: #1a2e24;
+            margin-bottom: 6px;
+        }
+
+        .registered-text p {
+            font-size: 13px;
+            color: #6c7a73;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 12px;
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: #4a5568;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 14px 16px;
+            border: 1.5px solid #e2e8f0;
+            border-radius: 14px;
+            font-size: 15px;
+            font-family: inherit;
+            transition: all 0.2s;
+        }
+
+        .form-group input:focus {
+            outline: none;
+            border-color: #00e676;
+            box-shadow: 0 0 0 3px rgba(0, 230, 118, 0.1);
+        }
+
+        .forgot-link {
+            text-align: right;
+            margin-bottom: 24px;
+        }
+
+        .forgot-link a {
+            font-size: 12px;
+            color: #00e676;
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .btn-login {
+            width: 100%;
+            background: #0a2e24;
+            color: white;
+            border: none;
+            padding: 14px;
+            border-radius: 40px;
+            font-size: 15px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+            margin-bottom: 24px;
+        }
+
+        .btn-login:hover {
+            background: #144d3e;
+            transform: translateY(-1px);
+        }
+
+        .language-selector {
+            text-align: center;
+            margin-bottom: 24px;
+        }
+
+        .language-selector span {
+            font-size: 13px;
+            color: #6c7a73;
+            cursor: pointer;
+            padding: 4px 8px;
+        }
+
+        .language-selector span.active {
+            color: #0a2e24;
+            font-weight: 600;
+            border-bottom: 2px solid #00e676;
+        }
+
+        .register-link {
+            text-align: center;
+            font-size: 13px;
+            color: #6c7a73;
+        }
+
+        .register-link a {
+            color: #00e676;
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .error-message {
+            background: #fee;
+            border: 1px solid #e74c3c;
+            border-radius: 12px;
+            padding: 12px;
+            margin-bottom: 20px;
+            font-size: 13px;
+            color: #c0392b;
+            text-align: center;
+        }
+
+        .loading-spinner {
+            display: inline-block;
+            width: 16px;
+            height: 16px;
+            border: 2px solid rgba(255,255,255,0.3);
+            border-radius: 50%;
+            border-top-color: white;
+            animation: spin 0.6s linear infinite;
+            margin-right: 8px;
+            vertical-align: middle;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        @media (max-width: 480px) {
+            .login-card {
+                padding: 32px 24px;
+            }
+            .registered-text h2 {
+                font-size: 20px;
+            }
+        }
+    </style>
 </head>
 <body>
-    <div class="app">
-        <!-- Header -->
-        <header>
-            <div class="logo">🌍 Ener2Crowd Africa</div>
-            <div class="tagline">Invest in Kenya's climate future</div>
-        </header>
-
-        <!-- Main Content -->
-        <main>
-            <!-- Projects Section -->
-            <div class="section-header">
-                <h2>🔥 Live Climate Projects</h2>
-                <p>Invest as low as KES 10</p>
-            </div>
-            <div id="projects-container" class="projects-grid">
-                <div class="loading">Loading projects...</div>
+    <div class="login-container">
+        <div class="login-card">
+            <div class="logo">
+                <h1>GAIN<span>.</span></h1>
+                <p>Green Africa Investment Network</p>
             </div>
 
-            <!-- Investment Modal (hidden by default) -->
-            <div id="investment-modal" class="modal" style="display: none;">
-                <div class="modal-content">
-                    <span class="close-btn" onclick="closeModal()">&times;</span>
-                    <h3 id="modal-project-title">Invest in Project</h3>
-                    <form id="investment-form">
-                        <label>Amount (KES):</label>
-                        <input type="number" id="investment-amount" min="10" max="100000" placeholder="Enter amount" required>
-                        <small>Min KES 10 | Max KES 100,000 (CMA rule)</small>
-                        
-                        <label>Your Name:</label>
-                        <input type="text" id="investor-name" placeholder="John Kimani" required>
-                        
-                        <label>Phone Number (M-Pesa):</label>
-                        <input type="tel" id="investor-phone" placeholder="0712345678" required>
-                        
-                        <label>Email (optional):</label>
-                        <input type="email" id="investor-email" placeholder="you@example.com">
-                        
-                        <button type="submit" class="invest-btn">Invest Now</button>
-                    </form>
-                    <div id="payment-status" class="status-message"></div>
+            <div class="registered-text">
+                <h2>Already registered?</h2>
+                <p>Login with your credentials</p>
+            </div>
+
+            <div id="error-message" style="display: none;" class="error-message"></div>
+
+            <form id="login-form" novalidate>
+                <div class="form-group">
+                    <label>E-Mail</label>
+                    <input type="email" id="email" placeholder="E-Mail" autocomplete="email">
                 </div>
-            </div>
-        </main>
 
-        <!-- Bottom Navigation -->
-        <nav class="bottom-nav">
-            <button onclick="showProjectsTab()" id="tab-projects" class="active">📋 Projects</button>
-            <button onclick="showPortfolioTab()" id="tab-portfolio">💰 My Portfolio</button>
-        </nav>
+                <div class="form-group">
+                    <label>Password</label>
+                    <input type="password" id="password" placeholder="Password" autocomplete="current-password">
+                </div>
+
+                <div class="forgot-link">
+                    <a href="#" onclick="showForgotPassword()">Forgot your password?</a>
+                </div>
+
+                <button type="submit" class="btn-login" id="loginBtn">LOGIN</button>
+            </form>
+
+            <div class="language-selector">
+                <span class="active">A English</span>
+            </div>
+
+            <div class="register-link">
+                Don't you have an account? <a href="signup.html">Register</a>
+            </div>
+        </div>
     </div>
 
-    <script src="script.js"></script>
+    <script>
+        // ✅ FIXED: Point to your running backend
+        const API_URL = 'http://localhost:3000/api';
+
+        async function handleLogin(event) {
+            event.preventDefault();
+            
+            const email = document.getElementById('email').value.trim();
+            const password = document.getElementById('password').value;
+            const loginBtn = document.getElementById('loginBtn');
+            const errorDiv = document.getElementById('error-message');
+            
+            errorDiv.style.display = 'none';
+            
+            if (!email || !password) {
+                showError('Please enter email and password');
+                return;
+            }
+            
+            loginBtn.disabled = true;
+            loginBtn.innerHTML = '<span class="loading-spinner"></span> LOGGING IN...';
+            
+            try {
+                console.log('Calling API:', `${API_URL}/auth/login`);
+                
+                const response = await fetch(`${API_URL}/auth/login`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ email, password })
+                });
+                
+                const data = await response.json();
+                console.log('Response:', data);
+                
+                if (data.success) {
+                    localStorage.setItem('token', data.token);
+                    localStorage.setItem('user', JSON.stringify(data.user));
+                    window.location.href = 'dashboard.html';
+                } else {
+                    showError(data.error || data.message || 'Invalid email or password');
+                    loginBtn.disabled = false;
+                    loginBtn.innerHTML = 'LOGIN';
+                }
+            } catch (error) {
+                console.error('Login error:', error);
+                showError('Cannot connect to server. Make sure backend is running on port 3000');
+                loginBtn.disabled = false;
+                loginBtn.innerHTML = 'LOGIN';
+            }
+        }
+        
+        function showError(message) {
+            const errorDiv = document.getElementById('error-message');
+            errorDiv.textContent = message;
+            errorDiv.style.display = 'block';
+            setTimeout(() => {
+                errorDiv.style.display = 'none';
+            }, 5000);
+        }
+        
+        function showForgotPassword() {
+            alert('Please contact support@ener2crowd.africa to reset your password.');
+        }
+        
+        const form = document.getElementById('login-form');
+        form.addEventListener('submit', handleLogin);
+        
+        const urlParams = new URLSearchParams(window.location.search);
+        const emailParam = urlParams.get('email');
+        if (emailParam) {
+            document.getElementById('email').value = emailParam;
+        }
+    </script>
 </body>
 </html>

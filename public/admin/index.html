@@ -2,8 +2,8 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ener2Crowd Africa | Admin Panel</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>GAIN Admin | Green Africa Investment Network</title>
     <style>
         * {
             margin: 0;
@@ -22,20 +22,21 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            background: #f8f9fc;
+            background: #ffffff;
             padding: 20px;
         }
 
         .login-card {
             background: white;
             border-radius: 24px;
-            padding: 40px;
-            width: 400px;
-            border: 1px solid #eef2f6;
+            padding: 32px 24px;
+            width: 100%;
+            max-width: 400px;
+            border: 1px solid #eef2f0;
         }
 
         .login-card h1 {
-            font-size: 24px;
+            font-size: 28px;
             margin-bottom: 8px;
         }
 
@@ -43,238 +44,528 @@
             margin-bottom: 20px;
         }
 
-        .input-group input, .input-group select, .input-group textarea {
+        .input-group input {
             width: 100%;
-            padding: 14px;
+            padding: 16px;
             border: 1.5px solid #e2e8f0;
-            border-radius: 12px;
-            font-size: 14px;
-            font-family: inherit;
+            border-radius: 14px;
+            font-size: 16px; /* Prevents zoom on mobile */
         }
 
-        .input-group input:focus, .input-group select:focus, .input-group textarea:focus {
+        .input-group input:focus {
             outline: none;
-            border-color: #2ecc71;
+            border-color: #00e676;
         }
 
         .btn-primary {
             width: 100%;
-            background: #1a1a2e;
+            background: #0a2e24;
             color: white;
             border: none;
-            padding: 14px;
-            border-radius: 40px;
-            font-size: 14px;
-            font-weight: 500;
+            padding: 16px;
+            border-radius: 50px;
+            font-size: 16px;
+            font-weight: 600;
             cursor: pointer;
+            transition: background 0.2s;
         }
 
-        .btn-primary:hover {
-            background: #2d2d44;
+        .btn-primary:active {
+            background: #144d3e;
+            transform: scale(0.98);
         }
 
         .btn-secondary {
-            background: #f0f4f8;
-            color: #4a5568;
+            background: #eef2f0;
+            color: #0a2e24;
             border: none;
-            padding: 10px 20px;
+            padding: 12px 24px;
             border-radius: 40px;
-            font-size: 13px;
             cursor: pointer;
+            font-size: 14px;
+            font-weight: 500;
         }
 
         /* Admin Container */
         .admin-container {
             display: none;
-            max-width: 1400px;
+            max-width: 600px; /* Mobile-first max width */
             margin: 0 auto;
-            padding: 20px;
+            padding: 16px;
+            padding-bottom: 80px; /* Space for bottom nav */
         }
 
         /* Header */
         .admin-header {
             background: white;
             border-radius: 20px;
-            padding: 20px 24px;
-            margin-bottom: 24px;
+            padding: 16px 20px;
+            margin-bottom: 16px;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            border: 1px solid #eef2f6;
+            border: 1px solid #eef2f0;
         }
 
         .admin-header h1 {
-            font-size: 20px;
-            font-weight: 600;
+            font-size: 18px;
+            font-weight: 700;
+        }
+
+        .admin-header p {
+            font-size: 11px;
+            margin-top: 2px;
         }
 
         .logout-btn {
-            background: #f0f4f8;
+            background: #eef2f0;
             border: none;
-            padding: 8px 20px;
+            padding: 8px 16px;
             border-radius: 40px;
             cursor: pointer;
             font-size: 13px;
+            font-weight: 500;
         }
 
-        /* Stats */
+        /* Stats - Mobile optimized: 2 columns */
         .stats-grid {
             display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 16px;
-            margin-bottom: 24px;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
+            margin-bottom: 20px;
         }
 
         .stat-card {
             background: white;
-            padding: 20px;
-            border-radius: 20px;
-            border: 1px solid #eef2f6;
+            padding: 16px;
+            border-radius: 16px;
+            border: 1px solid #eef2f0;
         }
 
         .stat-value {
-            font-size: 28px;
+            font-size: 24px;
             font-weight: 700;
-            color: #1a1a2e;
+            color: #0a2e24;
+            word-break: break-word;
         }
 
         .stat-label {
             font-size: 12px;
-            color: #8b9aae;
+            color: #6c7a73;
             margin-top: 6px;
         }
 
-        /* Tabs */
-        .admin-tabs {
-            display: flex;
-            gap: 8px;
-            margin-bottom: 24px;
+        /* Bottom Navigation - Mobile optimized */
+        .mobile-bottom-nav {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
             background: white;
-            padding: 8px;
-            border-radius: 60px;
-            border: 1px solid #eef2f6;
+            border-top: 1px solid #eef2f0;
+            padding: 8px 12px;
+            padding-bottom: env(safe-area-inset-bottom, 12px);
+            display: flex;
+            justify-content: space-around;
+            z-index: 100;
+            box-shadow: 0 -2px 20px rgba(0,0,0,0.05);
         }
 
-        .admin-tab {
-            padding: 10px 24px;
-            border: none;
+        .nav-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 4px;
             background: none;
+            border: none;
             cursor: pointer;
-            border-radius: 40px;
-            font-size: 14px;
-            font-weight: 500;
+            padding: 8px 12px;
+            border-radius: 12px;
             transition: all 0.2s;
+            flex: 1;
+            max-width: 80px;
         }
 
-        .admin-tab.active {
-            background: #1a1a2e;
-            color: white;
+        .nav-item:active {
+            background: #eef2f0;
+            transform: scale(0.96);
         }
 
-        /* Create Project Form */
+        .nav-icon {
+            font-size: 22px;
+        }
+
+        .nav-label {
+            font-size: 11px;
+            font-weight: 500;
+            color: #6c7a73;
+        }
+
+        .nav-item.active .nav-label {
+            color: #00e676;
+            font-weight: 600;
+        }
+
+        .nav-item.active .nav-icon {
+            filter: drop-shadow(0 0 2px #00e676);
+        }
+
+        /* Hide old tabs on mobile */
+        .admin-tabs {
+            display: none;
+        }
+
+        /* Panels */
+        .panel {
+            display: none;
+            margin-top: 0;
+        }
+
+        .panel.active-panel {
+            display: block;
+        }
+
+        /* Create Project Card - Mobile optimized */
         .create-project-card {
             background: white;
             border-radius: 20px;
-            padding: 24px;
-            margin-bottom: 24px;
-            border: 1px solid #eef2f6;
+            padding: 20px;
+            margin-bottom: 20px;
+            border: 1px solid #eef2f0;
         }
 
         .create-project-card h3 {
             margin-bottom: 20px;
             font-size: 18px;
+            font-weight: 700;
         }
 
+        /* Mobile: forms stack vertically */
         .form-row {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 16px;
+            display: flex;
+            flex-direction: column;
+            gap: 0;
+            margin-bottom: 0;
         }
 
-        /* Tables */
-        .table-container {
-            background: white;
-            border-radius: 20px;
-            overflow-x: auto;
-            border: 1px solid #eef2f6;
+        .form-group {
+            margin-bottom: 16px;
         }
 
-        table {
-            width: 100%;
-            border-collapse: collapse;
-        }
-
-        th, td {
-            padding: 14px 16px;
-            text-align: left;
-            border-bottom: 1px solid #eef2f6;
-        }
-
-        th {
-            background: #f8f9fc;
+        .form-group label {
+            display: block;
+            font-size: 13px;
             font-weight: 600;
+            margin-bottom: 8px;
+            color: #4a5568;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 14px;
+            border: 1.5px solid #e2e8f0;
+            border-radius: 14px;
+            font-size: 16px;
+            font-family: inherit;
+            background: white;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: #00e676;
+        }
+
+        /* Mobile Card Lists (replaces tables) */
+        .mobile-card-list {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .project-card {
+            background: white;
+            border-radius: 16px;
+            padding: 16px;
+            border: 1px solid #eef2f0;
+        }
+
+        .project-card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 12px;
+        }
+
+        .project-card-title {
+            font-weight: 700;
+            font-size: 16px;
+            flex: 1;
+        }
+
+        .project-card-image {
+            width: 48px;
+            height: 48px;
+            border-radius: 12px;
+            object-fit: cover;
+            background: #eef2f0;
+            margin-left: 12px;
+        }
+
+        .project-card-details {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-bottom: 12px;
             font-size: 13px;
             color: #4a5568;
         }
 
-        td {
-            font-size: 13px;
+        .project-card-detail {
+            background: #f8f9fc;
+            padding: 4px 10px;
+            border-radius: 20px;
+        }
+
+        .project-card-actions {
+            display: flex;
+            gap: 10px;
+            margin-top: 12px;
+        }
+
+        .project-card-actions button {
+            flex: 1;
+            padding: 12px;
+            border-radius: 40px;
+            font-size: 14px;
+            font-weight: 600;
+            border: none;
+            cursor: pointer;
+        }
+
+        /* Tables hidden on mobile */
+        .desktop-table {
+            display: none;
         }
 
         .badge {
-            padding: 4px 10px;
+            padding: 4px 12px;
             border-radius: 30px;
             font-size: 11px;
-            font-weight: 500;
+            font-weight: 600;
+            display: inline-block;
         }
 
         .badge-pending { background: #fef3c7; color: #d97706; }
-        .badge-verified { background: #e8f5e9; color: #2ecc71; }
-        .badge-active { background: #e8f5e9; color: #2ecc71; }
+        .badge-active { background: #e8f5e9; color: #2e7d32; }
+        .badge-verified { background: #e8f5e9; color: #00e676; }
 
         .btn-approve {
-            background: #2ecc71;
-            color: white;
+            background: #00e676;
+            color: #0a2e24;
             border: none;
-            padding: 6px 14px;
-            border-radius: 30px;
+            padding: 10px 16px;
+            border-radius: 40px;
             cursor: pointer;
-            font-size: 12px;
-            margin: 2px;
+            font-size: 13px;
+            font-weight: 600;
         }
 
         .btn-reject {
             background: #e74c3c;
             color: white;
             border: none;
-            padding: 6px 14px;
-            border-radius: 30px;
+            padding: 10px 16px;
+            border-radius: 40px;
             cursor: pointer;
-            font-size: 12px;
-            margin: 2px;
+            font-size: 13px;
+            font-weight: 600;
         }
 
         .toast {
             position: fixed;
-            bottom: 20px;
-            right: 20px;
-            padding: 12px 20px;
-            border-radius: 40px;
+            bottom: 80px;
+            left: 16px;
+            right: 16px;
+            padding: 14px 20px;
+            border-radius: 60px;
             color: white;
-            font-size: 13px;
+            font-size: 14px;
+            font-weight: 500;
             z-index: 1000;
+            text-align: center;
+            animation: slideUp 0.3s ease;
         }
 
-        .toast.success { background: #2ecc71; }
+        @keyframes slideUp {
+            from { transform: translateY(100px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        .toast.success { background: #00e676; color: #0a2e24; }
         .toast.error { background: #e74c3c; }
+
+        .image-preview {
+            width: 40px;
+            height: 40px;
+            border-radius: 8px;
+            object-fit: cover;
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: 40px 20px;
+            color: #6c7a73;
+            background: white;
+            border-radius: 20px;
+        }
+
+        /* Loading indicator */
+        .loading {
+            text-align: center;
+            padding: 40px;
+            color: #6c7a73;
+        }
+
+        /* KYC and User cards */
+        .kyc-card, .user-card, .investment-card {
+            background: white;
+            border-radius: 16px;
+            padding: 16px;
+            border: 1px solid #eef2f0;
+            margin-bottom: 12px;
+        }
+
+        .kyc-card-row, .user-card-row, .investment-card-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 8px;
+            font-size: 13px;
+        }
+
+        .kyc-label, .user-label, .investment-label {
+            color: #6c7a73;
+            font-weight: 500;
+        }
+
+        .kyc-value, .user-value, .investment-value {
+            color: #1a2e24;
+            font-weight: 500;
+            text-align: right;
+            word-break: break-word;
+            max-width: 60%;
+        }
+
+        /* Desktop breakpoint */
+        @media (min-width: 768px) {
+            .admin-container {
+                max-width: 1200px;
+                padding: 24px;
+                padding-bottom: 24px;
+            }
+
+            .mobile-bottom-nav {
+                display: none;
+            }
+
+            .admin-tabs {
+                display: flex;
+                gap: 8px;
+                margin-bottom: 24px;
+                background: white;
+                padding: 8px;
+                border-radius: 60px;
+                border: 1px solid #eef2f0;
+                flex-wrap: wrap;
+            }
+
+            .admin-tab {
+                padding: 10px 24px;
+                border: none;
+                background: none;
+                cursor: pointer;
+                border-radius: 40px;
+                font-size: 14px;
+                font-weight: 500;
+                transition: all 0.2s;
+            }
+
+            .admin-tab.active {
+                background: #0a2e24;
+                color: white;
+            }
+
+            .stats-grid {
+                grid-template-columns: repeat(4, 1fr);
+                gap: 20px;
+            }
+
+            .stat-value {
+                font-size: 32px;
+            }
+
+            .form-row {
+                flex-direction: row;
+                gap: 16px;
+            }
+
+            .form-row .form-group {
+                flex: 1;
+            }
+
+            .desktop-table {
+                display: block;
+                background: white;
+                border-radius: 20px;
+                overflow-x: auto;
+                border: 1px solid #eef2f0;
+            }
+
+            .mobile-card-list {
+                display: none;
+            }
+
+            table {
+                width: 100%;
+                border-collapse: collapse;
+                min-width: 600px;
+            }
+
+            th, td {
+                padding: 14px 16px;
+                text-align: left;
+                border-bottom: 1px solid #eef2f0;
+            }
+
+            th {
+                background: #f8f9fc;
+                font-weight: 600;
+                font-size: 13px;
+                color: #4a5568;
+            }
+
+            td {
+                font-size: 13px;
+            }
+
+            .toast {
+                bottom: 20px;
+                left: auto;
+                right: 20px;
+                max-width: 380px;
+            }
+        }
     </style>
 </head>
 <body>
     <!-- Login -->
     <div id="login-screen" class="login-container">
         <div class="login-card">
-            <h1>🔐 Admin Login</h1>
-            <p style="color: #8b9aae; margin-bottom: 24px;">Access the Ener2Crowd admin panel</p>
+            <h1>🔐 GAIN Admin</h1>
+            <p style="color: #6c7a73; margin-bottom: 24px;">Green Africa Investment Network</p>
             <div class="input-group">
                 <input type="email" id="admin-email" placeholder="Email" value="admin@ener2crowd.africa">
             </div>
@@ -289,8 +580,8 @@
     <div id="admin-dashboard" class="admin-container">
         <div class="admin-header">
             <div>
-                <h1>🌍 Ener2Crowd Admin</h1>
-                <p style="font-size: 12px; color: #8b9aae; margin-top: 4px;">Manage projects and investors</p>
+                <h1>🌍 GAIN Admin</h1>
+                <p>Green Africa Investment Network</p>
             </div>
             <button class="logout-btn" onclick="adminLogout()">Sign out</button>
         </div>
@@ -315,111 +606,149 @@
             </div>
         </div>
 
-        <!-- Tabs -->
+        <!-- Desktop Tabs (hidden on mobile) -->
         <div class="admin-tabs">
-            <button class="admin-tab" onclick="switchTab('create')">➕ Create Project</button>
-            <button class="admin-tab active" onclick="switchTab('projects')">📋 Pending Projects</button>
-            <button class="admin-tab" onclick="switchTab('active')">✅ Active Projects</button>
-            <button class="admin-tab" onclick="switchTab('kyc')">🪪 KYC</button>
-            <button class="admin-tab" onclick="switchTab('users')">👥 Users</button>
-            <button class="admin-tab" onclick="switchTab('investments')">💰 Investments</button>
+            <button class="admin-tab" onclick="switchDesktopTab('create')">➕ Create</button>
+            <button class="admin-tab active" onclick="switchDesktopTab('pending')">⏳ Pending (<span id="pending-count">0</span>)</button>
+            <button class="admin-tab" onclick="switchDesktopTab('active')">✅ Active</button>
+            <button class="admin-tab" onclick="switchDesktopTab('kyc')">🪪 KYC</button>
+            <button class="admin-tab" onclick="switchDesktopTab('users')">👥 Users</button>
+            <button class="admin-tab" onclick="switchDesktopTab('investments')">💰 Investments</button>
         </div>
 
+        <!-- Panels -->
         <!-- Create Project Panel -->
-        <div id="create-panel" style="display: none;" class="create-project-card">
-            <h3>➕ Create New Climate Project</h3>
-            <div class="form-row">
-                <div class="input-group">
-                    <label>Project Title</label>
+        <div id="create-panel" class="panel">
+            <div class="create-project-card">
+                <h3>➕ Create New Climate Project</h3>
+                
+                <div class="form-group">
+                    <label>Project Title *</label>
                     <input type="text" id="project-title" placeholder="e.g., Nairobi Solar Park">
                 </div>
-                <div class="input-group">
-                    <label>Sector</label>
+                
+                <div class="form-group">
+                    <label>Sector *</label>
                     <select id="project-sector">
-                        <option value="solar">☀️ Solar</option>
+                        <option value="solar">☀️ Solar Energy</option>
                         <option value="e-mobility">⚡ E-Mobility</option>
                         <option value="green-hydrogen">💧 Green Hydrogen</option>
                         <option value="carbon-credits">🌿 Carbon Credits</option>
                     </select>
                 </div>
-            </div>
-            <div class="input-group">
-                <label>Description</label>
-                <textarea id="project-description" rows="3" placeholder="Describe the project's impact..."></textarea>
-            </div>
-            <div class="form-row">
-                <div class="input-group">
-                    <label>Goal Amount (KES)</label>
-                    <input type="number" id="project-goal" placeholder="5,000,000">
+
+                <div class="form-group">
+                    <label>Description *</label>
+                    <textarea id="project-description" rows="3" placeholder="Describe the project's impact and goals..."></textarea>
                 </div>
-                <div class="input-group">
-                    <label>Expected Return (%)</label>
-                    <input type="number" id="project-return" placeholder="14" value="12">
+
+                <div class="form-group">
+                    <label>Project Image URL</label>
+                    <input type="text" id="project-image" placeholder="https://example.com/image.jpg">
                 </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>GAIN Score</label>
+                        <select id="project-gain-score">
+                            <option value="AAA">AAA - Highest</option>
+                            <option value="AA+">AA+ - Very High</option>
+                            <option value="AA">AA - High</option>
+                            <option value="A+">A+ - Good</option>
+                            <option value="A" selected>A - Above Avg</option>
+                            <option value="BBB">BBB - Average</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Expected Return (%) *</label>
+                        <input type="number" id="project-return" placeholder="14" value="12">
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Goal Amount (KES) *</label>
+                        <input type="number" id="project-goal" placeholder="5,000,000">
+                    </div>
+                    <div class="form-group">
+                        <label>Duration (months)</label>
+                        <input type="number" id="project-duration" placeholder="36" value="36">
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Location</label>
+                        <input type="text" id="project-location" placeholder="Nairobi, Kenya" value="Kenya">
+                    </div>
+                    <div class="form-group">
+                        <label>Developer Name</label>
+                        <input type="text" id="project-developer" placeholder="Company name">
+                    </div>
+                </div>
+
+                <button class="btn-primary" onclick="createProjectFromAdmin()">Create Project</button>
+                <div id="create-status" style="margin-top: 16px;"></div>
             </div>
-            <div class="form-row">
-                <div class="input-group">
-                    <label>Developer Name</label>
-                    <input type="text" id="project-developer" placeholder="Company name">
-                </div>
-                <div class="input-group">
-                    <label>Location</label>
-                    <input type="text" id="project-location" placeholder="Nairobi, Kenya">
-                </div>
-            </div>
-            <button class="btn-primary" onclick="createProjectFromAdmin()" style="width: auto; padding: 12px 30px;">Create Project</button>
-            <div id="create-status" style="margin-top: 16px;"></div>
         </div>
 
-        <!-- Pending Projects Table -->
-        <div id="projects-panel" class="table-container">
-            <table>
-                <thead>
-                    <tr><th>ID</th><th>Title</th><th>Sector</th><th>Goal</th><th>Status</th><th>Actions</th></tr>
-                </thead>
-                <tbody id="pending-projects-list"><tr><td colspan="6">Loading...</td</tr></tbody>
-            </table>
+        <!-- Pending Projects Panel -->
+        <div id="pending-panel" class="panel active-panel">
+            <div class="mobile-card-list" id="pending-mobile-list"></div>
+            <div class="desktop-table" id="pending-desktop-table"></div>
         </div>
 
-        <!-- Active Projects Table -->
-        <div id="active-panel" style="display: none;" class="table-container">
-            <table>
-                <thead>
-                    <tr><th>ID</th><th>Title</th><th>Sector</th><th>Goal</th><th>Raised</th><th>Investors</th><th>Status</th></tr>
-                </thead>
-                <tbody id="active-projects-list"><tr><td colspan="7">Loading...</td</tr></tbody>
-            </table>
+        <!-- Active Projects Panel -->
+        <div id="active-panel" class="panel">
+            <div class="mobile-card-list" id="active-mobile-list"></div>
+            <div class="desktop-table" id="active-desktop-table"></div>
         </div>
 
-        <!-- KYC Table -->
-        <div id="kyc-panel" style="display: none;" class="table-container">
-            <table>
-                <thead>
-                    <tr><th>ID</th><th>Name</th><th>Email</th><th>Phone</th><th>Document</th><th>Actions</th></tr>
-                </thead>
-                <tbody id="kyc-list"><tr><td colspan="6">Loading...</td</tr></tbody>
-            </table>
+        <!-- KYC Panel -->
+        <div id="kyc-panel" class="panel">
+            <div id="kyc-mobile-list"></div>
+            <div class="desktop-table" id="kyc-desktop-table"></div>
         </div>
 
-        <!-- Users Table -->
-        <div id="users-panel" style="display: none;" class="table-container">
-            <table>
-                <thead>
-                    <tr><th>ID</th><th>Name</th><th>Email</th><th>Role</th><th>KYC</th><th>Wallet</th></tr>
-                </thead>
-                <tbody id="users-list"><tr><td colspan="6">Loading...</td</tr></tbody>
-            </table>
+        <!-- Users Panel -->
+        <div id="users-panel" class="panel">
+            <div id="users-mobile-list"></div>
+            <div class="desktop-table" id="users-desktop-table"></div>
         </div>
 
-        <!-- Investments Table -->
-        <div id="investments-panel" style="display: none;" class="table-container">
-            <table>
-                <thead>
-                    <tr><th>ID</th><th>Investor</th><th>Project</th><th>Amount</th><th>Status</th><th>Date</th></tr>
-                </thead>
-                <tbody id="investments-list"><tr><td colspan="6">Loading...</td</tr></tbody>
-            </table>
+        <!-- Investments Panel -->
+        <div id="investments-panel" class="panel">
+            <div id="investments-mobile-list"></div>
+            <div class="desktop-table" id="investments-desktop-table"></div>
         </div>
+    </div>
+
+    <!-- Mobile Bottom Navigation -->
+    <div class="mobile-bottom-nav" id="mobile-bottom-nav" style="display: none;">
+        <button class="nav-item" data-panel="create">
+            <span class="nav-icon">➕</span>
+            <span class="nav-label">Create</span>
+        </button>
+        <button class="nav-item active" data-panel="pending">
+            <span class="nav-icon">⏳</span>
+            <span class="nav-label">Pending</span>
+        </button>
+        <button class="nav-item" data-panel="active">
+            <span class="nav-icon">✅</span>
+            <span class="nav-label">Active</span>
+        </button>
+        <button class="nav-item" data-panel="kyc">
+            <span class="nav-icon">🪪</span>
+            <span class="nav-label">KYC</span>
+        </button>
+        <button class="nav-item" data-panel="users">
+            <span class="nav-icon">👥</span>
+            <span class="nav-label">Users</span>
+        </button>
+        <button class="nav-item" data-panel="investments">
+            <span class="nav-icon">💰</span>
+            <span class="nav-label">Invest</span>
+        </button>
     </div>
 
     <script>
@@ -427,46 +756,94 @@
         let adminToken = null;
 
         const savedToken = localStorage.getItem('adminToken');
-        if (savedToken) {
-            adminToken = savedToken;
-            loadAdminDashboard();
+        if (savedToken) { adminToken = savedToken; loadDashboard(); }
+
+        // Mobile navigation
+        function initMobileNav() {
+            const navItems = document.querySelectorAll('.nav-item');
+            navItems.forEach(item => {
+                item.addEventListener('click', () => {
+                    const panelName = item.dataset.panel;
+                    switchMobilePanel(panelName);
+                    
+                    navItems.forEach(nav => nav.classList.remove('active'));
+                    item.classList.add('active');
+                });
+            });
+        }
+
+        function switchMobilePanel(panelName) {
+            const panels = ['create', 'pending', 'active', 'kyc', 'users', 'investments'];
+            panels.forEach(p => {
+                const panel = document.getElementById(`${p}-panel`);
+                if (panel) panel.classList.remove('active-panel');
+            });
+            document.getElementById(`${panelName}-panel`).classList.add('active-panel');
+        }
+
+        function switchDesktopTab(tabName) {
+            // Update active state on tabs
+            document.querySelectorAll('.admin-tab').forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+            
+            // Hide all panels
+            const panels = ['create', 'pending', 'active', 'kyc', 'users', 'investments'];
+            panels.forEach(p => {
+                document.getElementById(`${p}-panel`).classList.remove('active-panel');
+            });
+            
+            // Show selected panel
+            document.getElementById(`${tabName}-panel`).classList.add('active-panel');
         }
 
         async function adminLogin() {
             const email = document.getElementById('admin-email').value;
             const password = document.getElementById('admin-password').value;
-            
             try {
                 const res = await fetch(`${API_URL}/auth/login`, {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
+                    method: 'POST', headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({ email, password })
                 });
                 const data = await res.json();
-                
                 if (data.success && data.user.role === 'admin') {
                     adminToken = data.token;
                     localStorage.setItem('adminToken', data.token);
                     showToast('Login successful', 'success');
-                    loadAdminDashboard();
-                } else {
-                    showToast('Admin access required', 'error');
-                }
-            } catch(e) {
-                showToast('Connection error', 'error');
+                    loadDashboard();
+                } else { showToast('Admin access required', 'error'); }
+            } catch(e) { showToast('Connection error', 'error'); }
+        }
+
+        async function loadDashboard() {
+            if (!adminToken) {
+                showLogin();
+                return;
+            }
+            
+            document.getElementById('login-screen').style.display = 'none';
+            document.getElementById('admin-dashboard').style.display = 'block';
+            document.getElementById('mobile-bottom-nav').style.display = 'flex';
+            
+            // Initialize mobile nav
+            initMobileNav();
+            
+            try {
+                await loadStats();
+                await loadProjects();
+                await loadKYC();
+                await loadUsers();
+                await loadInvestments();
+            } catch (error) {
+                console.error('Dashboard load error:', error);
+                showToast('Session expired. Please login again.', 'error');
+                adminLogout();
             }
         }
 
-        async function loadAdminDashboard() {
-            document.getElementById('login-screen').style.display = 'none';
-            document.getElementById('admin-dashboard').style.display = 'block';
-            
-            await loadStats();
-            await loadPendingProjects();
-            await loadActiveProjects();
-            await loadKYC();
-            await loadUsers();
-            await loadInvestments();
+        function showLogin() {
+            document.getElementById('login-screen').style.display = 'flex';
+            document.getElementById('admin-dashboard').style.display = 'none';
+            document.getElementById('mobile-bottom-nav').style.display = 'none';
         }
 
         async function loadStats() {
@@ -474,6 +851,12 @@
                 const res = await fetch(`${API_URL}/admin/stats`, {
                     headers: { 'Authorization': `Bearer ${adminToken}` }
                 });
+                
+                if (res.status === 401) {
+                    adminLogout();
+                    return;
+                }
+                
                 const data = await res.json();
                 if (data.success) {
                     document.getElementById('stat-users').innerText = data.stats.totalUsers;
@@ -481,19 +864,24 @@
                     document.getElementById('stat-investments').innerHTML = `KES ${data.stats.totalInvestments.toLocaleString()}`;
                     document.getElementById('stat-pending').innerText = data.stats.pendingKYC;
                 }
-            } catch(e) { console.error(e); }
+            } catch(e) { 
+                console.error('Stats error:', e);
+            }
         }
 
         async function createProjectFromAdmin() {
             const title = document.getElementById('project-title').value;
             const description = document.getElementById('project-description').value;
             const sector = document.getElementById('project-sector').value;
+            const imageUrl = document.getElementById('project-image').value;
+            const gainScore = document.getElementById('project-gain-score').value;
             const goalAmount = parseInt(document.getElementById('project-goal').value);
             const expectedReturnPercent = parseInt(document.getElementById('project-return').value);
-            const developerName = document.getElementById('project-developer').value;
+            const duration = document.getElementById('project-duration').value;
             const location = document.getElementById('project-location').value;
+            const developerName = document.getElementById('project-developer').value;
             
-            if (!title || !description || !goalAmount || !developerName) {
+            if (!title || !description || !goalAmount) {
                 showToast('Please fill all required fields', 'error');
                 return;
             }
@@ -511,87 +899,154 @@
                         sector,
                         goalAmount,
                         expectedReturnPercent,
-                        deadline: new Date(Date.now() + 365 * 24 * 60 * 60 * 1000).toISOString().split('T')[0],
-                        developerName,
+                        imageUrl: imageUrl || null,
+                        gainScore: gainScore,
+                        duration: duration,
+                        location: location || 'Kenya',
+                        developerName: developerName || 'GAIN Admin',
                         developerEmail: 'admin@ener2crowd.africa',
-                        location: location || 'Kenya'
+                        deadline: new Date(Date.now() + 365 * 24 * 60 * 60 * 1000).toISOString().split('T')[0]
                     })
                 });
                 
                 const data = await res.json();
+                
                 if (data.success) {
                     showToast('Project created! Pending approval.', 'success');
-                    // Clear form
                     document.getElementById('project-title').value = '';
                     document.getElementById('project-description').value = '';
+                    document.getElementById('project-image').value = '';
                     document.getElementById('project-goal').value = '';
+                    document.getElementById('project-return').value = '12';
+                    document.getElementById('project-duration').value = '36';
+                    document.getElementById('project-location').value = 'Kenya';
                     document.getElementById('project-developer').value = '';
-                    // Refresh lists
-                    await loadPendingProjects();
-                    await loadActiveProjects();
+                    await loadProjects();
                     await loadStats();
-                } else {
+                } else { 
                     showToast('Error: ' + data.error, 'error');
                 }
-            } catch(e) {
-                showToast('Failed to create project', 'error');
+            } catch(e) { 
+                showToast('Failed to create project', 'error'); 
             }
         }
 
-        async function loadPendingProjects() {
-            const res = await fetch(`${API_URL}/projects`, {
-                headers: { 'Authorization': `Bearer ${adminToken}` }
-            });
-            const data = await res.json();
-            const tbody = document.getElementById('pending-projects-list');
-            
-            if (data.success && data.projects.length > 0) {
-                const pending = data.projects.filter(p => p.status === 'pending');
-                if (pending.length > 0) {
-                    tbody.innerHTML = pending.map(p => `
-                        <tr>
-                            <td>${p.id}</td>
-                            <td>${p.title}</td>
-                            <td>${p.sector}</td>
-                            <td>KES ${p.goalAmount.toLocaleString()}</td>
-                            <td><span class="badge badge-pending">${p.status}</span></td>
-                            <td>
-                                <button class="btn-approve" onclick="approveProject(${p.id})">✅ Approve</button>
-                                <button class="btn-reject" onclick="rejectProject(${p.id})">❌ Reject</button>
-                            </td>
-                        </tr>
-                    `).join('');
-                    return;
+        async function loadProjects() {
+            try {
+                const res = await fetch(`${API_URL}/projects`, {
+                    headers: { 'Authorization': `Bearer ${adminToken}` }
+                });
+                const data = await res.json();
+                if (data.success) {
+                    const pending = data.projects.filter(p => p.status === 'pending');
+                    const active = data.projects.filter(p => p.status === 'active');
+                    
+                    document.getElementById('pending-count').innerText = pending.length;
+                    
+                    // Render pending projects - mobile cards
+                    const pendingMobile = document.getElementById('pending-mobile-list');
+                    if (pending.length > 0) {
+                        pendingMobile.innerHTML = pending.map(p => `
+                            <div class="project-card">
+                                <div class="project-card-header">
+                                    <div class="project-card-title">${escapeHtml(p.title)}</div>
+                                    ${p.imageUrl ? `<img src="${p.imageUrl}" class="project-card-image" onerror="this.style.display='none'">` : '<div class="project-card-image" style="background:#eef2f0; display:flex;align-items:center;justify-content:center;">📷</div>'}
+                                </div>
+                                <div class="project-card-details">
+                                    <span class="project-card-detail">${p.sector}</span>
+                                    <span class="project-card-detail">GAIN ${p.gainScore || 'A'}</span>
+                                    <span class="project-card-detail">${p.expectedReturnPercent}% return</span>
+                                    <span class="project-card-detail">KES ${p.goalAmount.toLocaleString()}</span>
+                                </div>
+                                <div class="project-card-actions">
+                                    <button class="btn-approve" onclick="approveProject(${p.id})">✅ Approve</button>
+                                    <button class="btn-reject" onclick="rejectProject(${p.id})">❌ Reject</button>
+                                </div>
+                            </div>
+                        `).join('');
+                    } else {
+                        pendingMobile.innerHTML = '<div class="empty-state">✨ No pending projects</div>';
+                    }
+                    
+                    // Pending desktop table
+                    const pendingDesktop = document.getElementById('pending-desktop-table');
+                    if (pending.length > 0) {
+                        pendingDesktop.innerHTML = `
+                            <table>
+                                <thead><tr><th>ID</th><th>Image</th><th>Title</th><th>Sector</th><th>GAIN</th><th>Return</th><th>Goal</th><th>Actions</th></tr></thead>
+                                <tbody>
+                                    ${pending.map(p => `
+                                        <tr>
+                                            <td>${p.id}</td>
+                                            <td>${p.imageUrl ? `<img src="${p.imageUrl}" class="image-preview" onerror="this.style.display='none'">` : '📷'}</td>
+                                            <td>${escapeHtml(p.title)}</td>
+                                            <td>${p.sector}</td>
+                                            <td><span class="badge" style="background:#ffd700; color:#8b6914;">GAIN ${p.gainScore || 'A'}</span></td>
+                                            <td>${p.expectedReturnPercent}%</td>
+                                            <td>KES ${p.goalAmount.toLocaleString()}</td>
+                                            <td><button class="btn-approve" onclick="approveProject(${p.id})">Approve</button> <button class="btn-reject" onclick="rejectProject(${p.id})">Reject</button></td>
+                                        </tr>
+                                    `).join('')}
+                                </tbody>
+                            </table>
+                        `;
+                    } else {
+                        pendingDesktop.innerHTML = '<div class="empty-state">✨ No pending projects</div>';
+                    }
+                    
+                    // Active projects - mobile cards
+                    const activeMobile = document.getElementById('active-mobile-list');
+                    if (active.length > 0) {
+                        activeMobile.innerHTML = active.map(p => `
+                            <div class="project-card">
+                                <div class="project-card-header">
+                                    <div class="project-card-title">${escapeHtml(p.title)}</div>
+                                    ${p.imageUrl ? `<img src="${p.imageUrl}" class="project-card-image" onerror="this.style.display='none'">` : '<div class="project-card-image" style="background:#eef2f0; display:flex;align-items:center;justify-content:center;">📷</div>'}
+                                </div>
+                                <div class="project-card-details">
+                                    <span class="project-card-detail">${p.sector}</span>
+                                    <span class="project-card-detail">GAIN ${p.gainScore || 'A'}</span>
+                                    <span class="project-card-detail">${p.expectedReturnPercent}% return</span>
+                                </div>
+                                <div class="project-card-details">
+                                    <span class="project-card-detail">KES ${p.currentAmount.toLocaleString()} raised</span>
+                                    <span class="project-card-detail">KES ${p.goalAmount.toLocaleString()} goal</span>
+                                </div>
+                                <div><span class="badge badge-active">✓ Live</span></div>
+                            </div>
+                        `).join('');
+                    } else {
+                        activeMobile.innerHTML = '<div class="empty-state">📭 No active projects</div>';
+                    }
+                    
+                    // Active desktop table
+                    const activeDesktop = document.getElementById('active-desktop-table');
+                    if (active.length > 0) {
+                        activeDesktop.innerHTML = `
+                            <table>
+                                <thead><tr><th>ID</th><th>Image</th><th>Title</th><th>Sector</th><th>GAIN</th><th>Return</th><th>Raised</th><th>Goal</th><th>Status</th></tr></thead>
+                                <tbody>
+                                    ${active.map(p => `
+                                        <tr>
+                                            <td>${p.id}</td>
+                                            <td>${p.imageUrl ? `<img src="${p.imageUrl}" class="image-preview" onerror="this.style.display='none'">` : '📷'}</td>
+                                            <td>${escapeHtml(p.title)}</td>
+                                            <td>${p.sector}</td>
+                                            <td><span class="badge" style="background:#ffd700; color:#8b6914;">GAIN ${p.gainScore || 'A'}</span></td>
+                                            <td>${p.expectedReturnPercent}%</td>
+                                            <td>KES ${p.currentAmount.toLocaleString()}</td>
+                                            <td>KES ${p.goalAmount.toLocaleString()}</td>
+                                            <td><span class="badge badge-active">Live</span></td>
+                                        </tr>
+                                    `).join('')}
+                                </tbody>
+                            </table>
+                        `;
+                    } else {
+                        activeDesktop.innerHTML = '<div class="empty-state">📭 No active projects</div>';
+                    }
                 }
-            }
-            tbody.innerHTML = '<tr><td colspan="6">No pending projects</td></tr>';
-        }
-
-        async function loadActiveProjects() {
-            const res = await fetch(`${API_URL}/projects`, {
-                headers: { 'Authorization': `Bearer ${adminToken}` }
-            });
-            const data = await res.json();
-            const tbody = document.getElementById('active-projects-list');
-            
-            if (data.success && data.projects.length > 0) {
-                const active = data.projects.filter(p => p.status === 'active');
-                if (active.length > 0) {
-                    tbody.innerHTML = active.map(p => `
-                        <tr>
-                            <td>${p.id}</td>
-                            <td>${p.title}</td>
-                            <td>${p.sector}</td>
-                            <td>KES ${p.goalAmount.toLocaleString()}</td>
-                            <td>KES ${p.currentAmount.toLocaleString()}</td>
-                            <td>${p.investorCount || 0}</td>
-                            <td><span class="badge badge-active">Live</span></td>
-                        </tr>
-                    `).join('');
-                    return;
-                }
-            }
-            tbody.innerHTML = '<tr><td colspan="7">No active projects yet</td></tr>';
+            } catch(e) { console.error(e); }
         }
 
         async function loadKYC() {
@@ -599,24 +1054,60 @@
                 headers: { 'Authorization': `Bearer ${adminToken}` }
             });
             const data = await res.json();
-            const tbody = document.getElementById('kyc-list');
             
+            // Mobile cards
+            const kycMobile = document.getElementById('kyc-mobile-list');
             if (data.success && data.submissions.length > 0) {
-                tbody.innerHTML = data.submissions.map(s => `
-                    <tr>
-                        <td>${s.userId}</td>
-                        <td>${s.name}</td>
-                        <td>${s.email}</td>
-                        <td>${s.phoneNumber}</td>
-                        <td><a href="${s.documentUrl}" target="_blank">View</a></td>
-                        <td>
-                            <button class="btn-approve" onclick="approveKYC(${s.userId})">Approve</button>
-                            <button class="btn-reject" onclick="rejectKYC(${s.userId})">Reject</button>
-                        </td>
-                    </tr>
+                kycMobile.innerHTML = data.submissions.map(s => `
+                    <div class="kyc-card">
+                        <div class="kyc-card-row">
+                            <span class="kyc-label">Name</span>
+                            <span class="kyc-value">${escapeHtml(s.name)}</span>
+                        </div>
+                        <div class="kyc-card-row">
+                            <span class="kyc-label">Email</span>
+                            <span class="kyc-value">${escapeHtml(s.email)}</span>
+                        </div>
+                        <div class="kyc-card-row">
+                            <span class="kyc-label">Phone</span>
+                            <span class="kyc-value">${s.phoneNumber || 'N/A'}</span>
+                        </div>
+                        <div class="kyc-card-row">
+                            <span class="kyc-label">Document</span>
+                            <span class="kyc-value"><a href="${s.documentUrl}" target="_blank">📄 View</a></span>
+                        </div>
+                        <div style="display: flex; gap: 10px; margin-top: 12px;">
+                            <button class="btn-approve" style="flex:1" onclick="approveKYC(${s.userId})">✓ Approve</button>
+                            <button class="btn-reject" style="flex:1" onclick="rejectKYC(${s.userId})">✗ Reject</button>
+                        </div>
+                    </div>
                 `).join('');
             } else {
-                tbody.innerHTML = '<tr><td colspan="6">No pending KYC</td></tr>';
+                kycMobile.innerHTML = '<div class="empty-state">✓ No pending KYC submissions</div>';
+            }
+            
+            // Desktop table
+            const kycDesktop = document.getElementById('kyc-desktop-table');
+            if (data.success && data.submissions.length > 0) {
+                kycDesktop.innerHTML = `
+                    <table>
+                        <thead><tr><th>ID</th><th>Name</th><th>Email</th><th>Phone</th><th>Document</th><th>Actions</th></tr></thead>
+                        <tbody>
+                            ${data.submissions.map(s => `
+                                <tr>
+                                    <td>${s.userId}</td>
+                                    <td>${escapeHtml(s.name)}</td>
+                                    <td>${escapeHtml(s.email)}</td>
+                                    <td>${s.phoneNumber || 'N/A'}</td>
+                                    <td><a href="${s.documentUrl}" target="_blank">View</a></td>
+                                    <td><button class="btn-approve" onclick="approveKYC(${s.userId})">Approve</button> <button class="btn-reject" onclick="rejectKYC(${s.userId})">Reject</button></td>
+                                </tr>
+                            `).join('')}
+                        </tbody>
+                    </table>
+                `;
+            } else {
+                kycDesktop.innerHTML = '<div class="empty-state">✓ No pending KYC submissions</div>';
             }
         }
 
@@ -625,21 +1116,60 @@
                 headers: { 'Authorization': `Bearer ${adminToken}` }
             });
             const data = await res.json();
-            const tbody = document.getElementById('users-list');
             
+            // Mobile cards
+            const usersMobile = document.getElementById('users-mobile-list');
             if (data.success && data.users.length > 0) {
-                tbody.innerHTML = data.users.map(u => `
-                    <tr>
-                        <td>${u.id}</td>
-                        <td>${u.name}</td>
-                        <td>${u.email}</td>
-                        <td>${u.role}</td>
-                        <td><span class="badge badge-${u.kycStatus}">${u.kycStatus}</span></td>
-                        <td>KES ${u.walletBalance.toLocaleString()}</td>
-                    </tr>
+                usersMobile.innerHTML = data.users.map(u => `
+                    <div class="user-card">
+                        <div class="user-card-row">
+                            <span class="user-label">Name</span>
+                            <span class="user-value">${escapeHtml(u.name)}</span>
+                        </div>
+                        <div class="user-card-row">
+                            <span class="user-label">Email</span>
+                            <span class="user-value">${escapeHtml(u.email)}</span>
+                        </div>
+                        <div class="user-card-row">
+                            <span class="user-label">Role</span>
+                            <span class="user-value">${u.role}</span>
+                        </div>
+                        <div class="user-card-row">
+                            <span class="user-label">KYC</span>
+                            <span class="user-value"><span class="badge ${u.kycStatus === 'verified' ? 'badge-active' : 'badge-pending'}">${u.kycStatus}</span></span>
+                        </div>
+                        <div class="user-card-row">
+                            <span class="user-label">Wallet</span>
+                            <span class="user-value">KES ${u.walletBalance.toLocaleString()}</span>
+                        </div>
+                    </div>
                 `).join('');
             } else {
-                tbody.innerHTML = '<tr><td colspan="6">No users found</td></tr>';
+                usersMobile.innerHTML = '<div class="empty-state">👥 No users found</div>';
+            }
+            
+            // Desktop table
+            const usersDesktop = document.getElementById('users-desktop-table');
+            if (data.success && data.users.length > 0) {
+                usersDesktop.innerHTML = `
+                    <table>
+                        <thead><tr><th>ID</th><th>Name</th><th>Email</th><th>Role</th><th>KYC</th><th>Wallet</th></tr></thead>
+                        <tbody>
+                            ${data.users.map(u => `
+                                <tr>
+                                    <td>${u.id}</td>
+                                    <td>${escapeHtml(u.name)}</td>
+                                    <td>${escapeHtml(u.email)}</td>
+                                    <td>${u.role}</td>
+                                    <td><span class="badge ${u.kycStatus === 'verified' ? 'badge-active' : 'badge-pending'}">${u.kycStatus}</span></td>
+                                    <td>KES ${u.walletBalance.toLocaleString()}</td>
+                                </tr>
+                            `).join('')}
+                        </tbody>
+                    </table>
+                `;
+            } else {
+                usersDesktop.innerHTML = '<div class="empty-state">👥 No users found</div>';
             }
         }
 
@@ -648,62 +1178,86 @@
                 headers: { 'Authorization': `Bearer ${adminToken}` }
             });
             const data = await res.json();
-            const tbody = document.getElementById('investments-list');
             
+            // Mobile cards
+            const investmentsMobile = document.getElementById('investments-mobile-list');
             if (data.success && data.investments.length > 0) {
-                tbody.innerHTML = data.investments.map(i => `
-                    <tr>
-                        <td>${i.id}</td>
-                        <td>${i.investorName}</td>
-                        <td>${i.projectTitle}</td>
-                        <td>KES ${i.amount.toLocaleString()}</td>
-                        <td><span class="badge badge-${i.status === 'completed' ? 'verified' : 'pending'}">${i.status}</span></td>
-                        <td>${new Date(i.createdAt).toLocaleDateString()}</td>
-                    </tr>
+                investmentsMobile.innerHTML = data.investments.map(i => `
+                    <div class="investment-card">
+                        <div class="investment-card-row">
+                            <span class="investment-label">Investor</span>
+                            <span class="investment-value">${escapeHtml(i.investorName)}</span>
+                        </div>
+                        <div class="investment-card-row">
+                            <span class="investment-label">Project</span>
+                            <span class="investment-value">${escapeHtml(i.projectTitle)}</span>
+                        </div>
+                        <div class="investment-card-row">
+                            <span class="investment-label">Amount</span>
+                            <span class="investment-value">KES ${i.amount.toLocaleString()}</span>
+                        </div>
+                        <div class="investment-card-row">
+                            <span class="investment-label">Status</span>
+                            <span class="investment-value"><span class="badge ${i.status === 'completed' ? 'badge-active' : 'badge-pending'}">${i.status}</span></span>
+                        </div>
+                        <div class="investment-card-row">
+                            <span class="investment-label">Date</span>
+                            <span class="investment-value">${new Date(i.createdAt).toLocaleDateString()}</span>
+                        </div>
+                    </div>
                 `).join('');
             } else {
-                tbody.innerHTML = '<tr><td colspan="6">No investments yet</td></tr>';
+                investmentsMobile.innerHTML = '<div class="empty-state">💰 No investments yet</div>';
+            }
+            
+            // Desktop table
+            const investmentsDesktop = document.getElementById('investments-desktop-table');
+            if (data.success && data.investments.length > 0) {
+                investmentsDesktop.innerHTML = `
+                    <table>
+                        <thead><tr><th>ID</th><th>Investor</th><th>Project</th><th>Amount</th><th>Status</th><th>Date</th></tr></thead>
+                        <tbody>
+                            ${data.investments.map(i => `
+                                <tr>
+                                    <td>${i.id}</td>
+                                    <td>${escapeHtml(i.investorName)}</td>
+                                    <td>${escapeHtml(i.projectTitle)}</td>
+                                    <td>KES ${i.amount.toLocaleString()}</td>
+                                    <td><span class="badge ${i.status === 'completed' ? 'badge-active' : 'badge-pending'}">${i.status}</span></td>
+                                    <td>${new Date(i.createdAt).toLocaleDateString()}</td>
+                                </tr>
+                            `).join('')}
+                        </tbody>
+                    </table>
+                `;
+            } else {
+                investmentsDesktop.innerHTML = '<div class="empty-state">💰 No investments yet</div>';
             }
         }
 
         async function approveProject(id) {
-    try {
-        const res = await fetch(`${API_URL}/projects/${id}/approve`, {
-            method: 'POST',
-            headers: { 
-                'Authorization': `Bearer ${adminToken}`,
-                'Content-Type': 'application/json'
-            }
-        });
-        const data = await res.json();
-        if (data.success) {
-            showToast('Project approved! Now visible to users.', 'success');
-            // Refresh all lists
-            await loadPendingProjects();
-            await loadActiveProjects();
-            await loadStats();
-        } else {
-            showToast('Failed to approve: ' + (data.error || 'Unknown error'), 'error');
-        }
-    } catch(e) {
-        console.error('Approve error:', e);
-        showToast('Failed to approve project', 'error');
-    }
-}
-
-        async function rejectProject(id) {
-            const res = await fetch(`${API_URL}/admin/projects/${id}/reject`, {
+            const res = await fetch(`${API_URL}/projects/${id}/approve`, {
                 method: 'POST',
                 headers: { 'Authorization': `Bearer ${adminToken}` }
             });
             const data = await res.json();
             if (data.success) {
-                showToast('Project rejected', 'success');
-                await loadPendingProjects();
-                await loadActiveProjects();
-            } else {
-                showToast('Failed to reject', 'error');
-            }
+                showToast('✅ Project approved and visible to users!', 'success');
+                await loadProjects();
+                await loadStats();
+            } else { showToast('Failed to approve', 'error'); }
+        }
+
+        async function rejectProject(id) {
+            const res = await fetch(`${API_URL}/projects/${id}/reject`, {
+                method: 'POST',
+                headers: { 'Authorization': `Bearer ${adminToken}` }
+            });
+            const data = await res.json();
+            if (data.success) {
+                showToast('❌ Project rejected', 'success');
+                await loadProjects();
+            } else { showToast('Failed to reject', 'error'); }
         }
 
         async function approveKYC(id) {
@@ -713,12 +1267,10 @@
             });
             const data = await res.json();
             if (data.success) {
-                showToast('KYC approved', 'success');
+                showToast('✓ KYC approved', 'success');
                 await loadKYC();
                 await loadStats();
-            } else {
-                showToast('Failed to approve KYC', 'error');
-            }
+            } else { showToast('Failed to approve KYC', 'error'); }
         }
 
         async function rejectKYC(id) {
@@ -728,37 +1280,15 @@
             });
             const data = await res.json();
             if (data.success) {
-                showToast('KYC rejected', 'success');
+                showToast('✗ KYC rejected', 'success');
                 await loadKYC();
-            } else {
-                showToast('Failed to reject KYC', 'error');
-            }
-        }
-
-        function switchTab(tab) {
-            document.querySelectorAll('.admin-tab').forEach(btn => btn.classList.remove('active'));
-            event.target.classList.add('active');
-            
-            document.getElementById('create-panel').style.display = 'none';
-            document.getElementById('projects-panel').style.display = 'none';
-            document.getElementById('active-panel').style.display = 'none';
-            document.getElementById('kyc-panel').style.display = 'none';
-            document.getElementById('users-panel').style.display = 'none';
-            document.getElementById('investments-panel').style.display = 'none';
-            
-            if (tab === 'create') document.getElementById('create-panel').style.display = 'block';
-            else if (tab === 'projects') document.getElementById('projects-panel').style.display = 'block';
-            else if (tab === 'active') document.getElementById('active-panel').style.display = 'block';
-            else if (tab === 'kyc') document.getElementById('kyc-panel').style.display = 'block';
-            else if (tab === 'users') document.getElementById('users-panel').style.display = 'block';
-            else if (tab === 'investments') document.getElementById('investments-panel').style.display = 'block';
+            } else { showToast('Failed to reject KYC', 'error'); }
         }
 
         function adminLogout() {
             localStorage.removeItem('adminToken');
             adminToken = null;
-            document.getElementById('login-screen').style.display = 'flex';
-            document.getElementById('admin-dashboard').style.display = 'none';
+            showLogin();
             showToast('Signed out', 'success');
         }
 
@@ -768,6 +1298,16 @@
             toast.innerText = msg;
             document.body.appendChild(toast);
             setTimeout(() => toast.remove(), 3000);
+        }
+
+        function escapeHtml(str) {
+            if (!str) return '';
+            return str.replace(/[&<>]/g, function(m) {
+                if (m === '&') return '&amp;';
+                if (m === '<') return '&lt;';
+                if (m === '>') return '&gt;';
+                return m;
+            });
         }
     </script>
 </body>
