@@ -11,7 +11,13 @@ const app = express();
 const PORT = process.env.PORT || 3000;
 
 // Middleware
-app.use(cors());
+// Allow requests from your frontend domain
+app.use(cors({
+    origin: ['http://localhost:3000', 'https://green-ztje.onrender.com'],
+    credentials: true,
+    methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+    allowedHeaders: ['Content-Type', 'Authorization']
+}));
 app.use(express.json());
 app.use(express.static('public'));
 
