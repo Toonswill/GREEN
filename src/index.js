@@ -10,18 +10,37 @@ dotenv.config();
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-// Middleware
-// Allow requests from your frontend domain
+// ========== CORS CONFIGURATION (MUST BE BEFORE ROUTES) ==========
+const allowedOrigins = [
+    'http://localhost:3000',
+    'http://localhost:5000',
+    'https://green-ztje.onrender.com'
+];
+
 app.use(cors({
-    origin: ['http://localhost:3000', 'https://green-ztje.onrender.com'],
+    origin: function(origin, callback) {
+        // Allow requests with no origin (like mobile apps or curl)
+        if (!origin) return callback(null, true);
+        
+        if (allowedOrigins.indexOf(origin) === -1) {
+            console.log('Blocked origin:', origin);
+            return callback(null, false);
+        }
+        return callback(null, true);
+    },
     credentials: true,
     methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
     allowedHeaders: ['Content-Type', 'Authorization']
 }));
+
+// Handle preflight requests
+app.options('*', cors());
+
+// ========== MIDDLEWARE ==========
 app.use(express.json());
 app.use(express.static('public'));
 
-// Import routes
+// ========== API ROUTES ==========
 const authRoutes = require('./routes/auth');
 const kycRoutes = require('./routes/kyc');
 const walletRoutes = require('./routes/wallet');
@@ -39,17 +58,18 @@ app.use('/api/investments', investmentRoutes);
 app.use('/api/admin', adminRoutes);
 app.use('/api/mpesa', mpesaRoutes);
 
-// Serve HTML pages (not JSON)
+// ========== FRONTEND ROUTES ==========
+// Serve dashboard.html at root
 app.get('/', (req, res) => {
-    res.sendFile(path.join(__dirname, '../public/index.html'));
+    res.sendFile(path.join(__dirname, '../public/dashboard.html'));
 });
 
-// Optional: Redirect old dashboard path to new one (for compatibility)
+// Redirect old dashboard path
 app.get('/dashboard/index.html', (req, res) => {
     res.redirect('/dashboard.html');
 });
 
-// Create admin user if not exists
+// ========== CREATE ADMIN USER ==========
 async function ensureAdminExists() {
     try {
         const admin = getUserByEmail('admin@gain.com');
@@ -76,20 +96,20 @@ async function ensureAdminExists() {
     }
 }
 
-// Start server
+// ========== START SERVER ==========
 app.listen(PORT, async () => {
     await ensureAdminExists();
     console.log(`
 ╔════════════════════════════════════════════════════════════════╗
 ║                                                                ║
-║   🌍 GAIN - Green Africa Investment Network       ║
+║   🌍 GAIN - Green Africa Investment Network                    ║
 ║                                                                ║
 ║   🚀 Server: http://localhost:${PORT}                           ║
 ║   📱 M-Pesa: MOCK mode                                         ║
 ║                                                                ║
-║   🔐 Admin: admin@gain.com / Admin123!                ║
+║   🔐 Admin: admin@gain.com / Admin123!                         ║
 ║                                                                ║
-║   📱 User Dashboard: http://localhost:${PORT}/dashboard.html     ║
+║   📱 User Dashboard: http://localhost:${PORT}/                  ║
 ║   🔧 Admin Panel: http://localhost:${PORT}/admin/index.html     ║
 ║                                                                ║
 ║   🇰🇪 Building for Kenya, scaling to Africa                    ║
